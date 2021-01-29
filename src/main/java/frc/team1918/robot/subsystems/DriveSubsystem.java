@@ -341,6 +341,7 @@ public class DriveSubsystem extends SubsystemBase {
 						rrHome = Double.parseDouble(part[1]);
 						break;
 				}
+				line = br.readLine(); //beg for more bread
 			}
 			br.close();
 			fr.close();
