@@ -86,8 +86,8 @@ public class RobotContainer {
     m_drive.setDefaultCommand(
       new drive_defaultDrive(
           m_drive,
-          () -> Helpers.OI.getAxisStrafeValue(true),
           () -> Helpers.OI.getAxisFwdValue(true),
+          () -> Helpers.OI.getAxisStrafeValue(true),
           () -> Helpers.OI.getAxisTurnValue(true)
       )
     );

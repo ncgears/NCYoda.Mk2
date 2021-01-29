@@ -22,7 +22,7 @@ public class Helpers {
          * @return double precision -1 to 1 of the fwd axis 
          */
         public final static double getAxisFwdValue(boolean useDeadband) {
-            return (useDeadband) ? applyDeadband(dj.getRawAxis(Constants.OI.DRIVE_AXIS_FWD)) : dj.getRawAxis(Constants.OI.DRIVE_AXIS_FWD);
+            return (useDeadband) ? applyDeadband(dj.getRawAxis(Constants.OI.DRIVE_AXIS_FWD)*-1) : dj.getRawAxis(Constants.OI.DRIVE_AXIS_FWD)*-1;
         }
 
         /**

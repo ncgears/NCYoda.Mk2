@@ -7,12 +7,26 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.team1918.robot.Constants;
 import frc.team1918.robot.Helpers;
 import frc.team1918.robot.SwerveModule;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import java.io.BufferedWriter;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class DriveSubsystem extends SubsystemBase {
 
 	private static DriveSubsystem instance;
 	private static SwerveModule dtFL, dtFR, dtRL, dtRR;
 	private static AHRS gyro;
+	private static double flHome = 0, frHome = 0, rlHome = 0, rrHome = 0;
+	private static boolean isFirstTime = true;
+	private File f;
+	private BufferedWriter bw;
+	private FileWriter fw;
+	private BufferedReader br;
+	private FileReader fr;
 
 	public static DriveSubsystem getInstance() {
 		if (instance == null)
@@ -22,13 +36,13 @@ public class DriveSubsystem extends SubsystemBase {
 
 	public DriveSubsystem() {
 	    dtFL = new SwerveModule(Constants.DriveTrain.DT_FL_DRIVE_MC_ID,
-				Constants.DriveTrain.DT_FL_TURN_MC_ID, 4.20, 0.01, 0, 200); // Front Left
+				Constants.DriveTrain.DT_FL_TURN_MC_ID, 3.0, 0, 50, 0); // Front Left //izone was 200  // 3,0,50,0
 		dtFR = new SwerveModule(Constants.DriveTrain.DT_FR_DRIVE_MC_ID,
-				Constants.DriveTrain.DT_FR_TURN_MC_ID, 4.20, 0.01, 0, 200); // Front Right
+				Constants.DriveTrain.DT_FR_TURN_MC_ID, 3.0, 0, 50, 0); // Front Right
 		dtRL = new SwerveModule(Constants.DriveTrain.DT_RL_DRIVE_MC_ID,
-				Constants.DriveTrain.DT_RL_TURN_MC_ID, 4.20, 0.01, 0, 200); // Rear Left
+				Constants.DriveTrain.DT_RL_TURN_MC_ID, 3.0, 0, 50, 0); // Rear Left
 		dtRR = new SwerveModule(Constants.DriveTrain.DT_RR_DRIVE_MC_ID,
-                Constants.DriveTrain.DT_RR_TURN_MC_ID, 4.20, 0.01, 0, 200); // Rear Right
+                Constants.DriveTrain.DT_RR_TURN_MC_ID, 3.0, 0, 50, 0); // Rear Right
 
 		gyro = new AHRS(SPI.Port.kMXP);
 	}
@@ -38,10 +52,10 @@ public class DriveSubsystem extends SubsystemBase {
 	}
 
 	public static void setDrivePower(double flPower, double frPower, double rlPower, double rrPower) {
-	    dtFL.setDrivePower(flPower);
-		dtFR.setDrivePower(frPower);
-		dtRL.setDrivePower(rlPower);
-		dtRR.setDrivePower(rrPower);
+	    // dtFL.setDrivePower(flPower);
+		// dtFR.setDrivePower(frPower);
+		// dtRL.setDrivePower(rlPower);
+		// dtRR.setDrivePower(rrPower);
 	}
 
 	public static void setTurnPower(double flPower, double frPower, double rlPower, double rrPower) {
@@ -70,7 +84,8 @@ public class DriveSubsystem extends SubsystemBase {
 		setLocation(loc, loc, loc, loc);
 	}
 
-	private static double l = 21, w = 21, r = Math.sqrt((l * l) + (w * w));
+	//TODO: Move this somewhere that makes more sense, or replace with constants from constants.java
+	private static double l = 26, w = 23, r = Math.sqrt((l * l) + (w * w));
 
 	public static boolean isdtLFTurnEncConnected() {
 		return dtFL.isTurnEncConnected();
@@ -95,7 +110,7 @@ public class DriveSubsystem extends SubsystemBase {
 		dtRR.resetTurnEnc();
 	}
 
-	public static void stopDrive() {
+	public static void stopAllDrive() {
 	    dtFL.stopDrive();
 		dtFR.stopDrive();
 		dtRL.stopDrive();
@@ -111,14 +126,14 @@ public class DriveSubsystem extends SubsystemBase {
 	}
 
 	private static boolean offSetSet = false;
-
+// Dont think setoffsets is needed, perhaps delete the whole shebang
 	public static void setOffSets() {
 		if (!offSetSet) {
 			double flOff = 0, frOff = 0, rlOff = 0, rrOff = 0;
-		    dtFL.setTurnPower(0);
-			dtRL.setTurnPower(0);
-			dtFR.setTurnPower(0);
-			dtRR.setTurnPower(0);
+		    dtFL.setTurnPowerPercent(0);
+			dtRL.setTurnPowerPercent(0);
+			dtFR.setTurnPowerPercent(0);
+			dtRR.setTurnPowerPercent(0);
 
 			flOff = DriveSubsystem.dtFL.getTurnAbsPos();
 			frOff = DriveSubsystem.dtFR.getTurnAbsPos();
@@ -160,12 +175,18 @@ public class DriveSubsystem extends SubsystemBase {
 		return gyro.getAngle() * (Math.PI / 180d);
 	}
 
-	public static void setDriveBrakeMode(boolean b) {
-		//we do this as a safety feature in case we lose comms to a drive controller, its left in coast mode and doesn't drag the wheel
-	    dtFL.setBrakeMode(b);
-		dtFR.setBrakeMode(b);
-		dtRL.setBrakeMode(b);
-		dtRR.setBrakeMode(b);
+	public static void setAllDriveBrakeMode(boolean b) {
+	    dtFL.setBrakeMode("drive", b);
+		dtFR.setBrakeMode("drive", b);
+		dtRL.setBrakeMode("drive", b);
+		dtRR.setBrakeMode("drive", b);
+	}
+
+	public static void setAllTurnBrakeMode(boolean b) {
+	    dtFL.setBrakeMode("turn", b);
+		dtFR.setBrakeMode("turn", b);
+		dtRL.setBrakeMode("turn", b);
+		dtRR.setBrakeMode("turn", b);
 	}
 
 	public static double getAverageError() {
@@ -183,17 +204,19 @@ public class DriveSubsystem extends SubsystemBase {
 		double b = str + (rot * (l / r));
 		double c = fwd - (rot * (w / r));
 		double d = fwd + (rot * (w / r));
+		
+		//Wheel Speed
+		double ws1 = Math.sqrt((b * b) + (c * c)); //FR
+		double ws2 = Math.sqrt((a * a) + (c * c)); //RR
+		double ws3 = Math.sqrt((a * a) + (d * d)); //RL
+		double ws4 = Math.sqrt((b * b) + (d * d)); //FL
 
-		double ws1 = Math.sqrt((b * b) + (c * c));
-		double ws2 = Math.sqrt((b * b) + (d * d));
-		double ws3 = Math.sqrt((a * a) + (d * d));
-		double ws4 = Math.sqrt((a * a) + (c * c));
-
-		double wa1 = Math.atan2(b, c) * 180 / Math.PI;
-		double wa2 = Math.atan2(b, d) * 180 / Math.PI;
-		double wa3 = Math.atan2(a, d) * 180 / Math.PI;
-		double wa4 = Math.atan2(a, c) * 180 / Math.PI;
-
+		//Wheel Angle
+		double wa1 = Math.atan2(b, c); //FR
+		double wa2 = Math.atan2(a, c); //RR
+		double wa3 = Math.atan2(a, d); //RL
+		double wa4 = Math.atan2(b, d); //FL
+		
 		double max = ws1;
 		max = Math.max(max, ws2);
 		max = Math.max(max, ws3);
@@ -204,24 +227,40 @@ public class DriveSubsystem extends SubsystemBase {
 			ws3 /= max;
 			ws4 /= max;
 		}
-		DriveSubsystem.setDrivePower(ws4, ws2, ws1, ws3); //TODO: Are we supplying in right order
-		DriveSubsystem.setLocation(angleToLoc(wa4), angleToLoc(wa2), angleToLoc(wa1), angleToLoc(wa3));
+		SmartDashboard.putNumber("ws1", ws1);
+		SmartDashboard.putNumber("ws2", ws2);
+		SmartDashboard.putNumber("ws3", ws3);
+		SmartDashboard.putNumber("ws4", ws4);
+		SmartDashboard.putNumber("wa1", wa1);
+		SmartDashboard.putNumber("wa2", wa2);
+		SmartDashboard.putNumber("wa3", wa3);
+		SmartDashboard.putNumber("wa4", wa4);
+
+		DriveSubsystem.setDrivePower(ws4, ws1, ws2, ws3);
+		DriveSubsystem.setLocation(wa4, wa1, wa2, wa3);
 	}
 
 	public void humanDrive(double fwd, double str, double rot) {
-		if (Math.abs(rot) < 0.01)
-			rot = 0;
+		if (isFirstTime) {
+			//dtFL.setEncPos(0); //same as dtFL.resetTurnEnc()
+			resetAllEnc();
+			isFirstTime = false;
+		}
 
-			fwd = Helpers.OI.applyDeadband(fwd);
-			str = Helpers.OI.applyDeadband(str);
-			rot = Helpers.OI.applyDeadband(rot);
-		
+		if (Math.abs(rot) < 0.01) rot = 0;
+
+		fwd = Helpers.OI.applyDeadband(fwd);
+		str = Helpers.OI.applyDeadband(str);
+		rot = Helpers.OI.applyDeadband(rot);
+		SmartDashboard.putNumber("fwd", fwd);
+		SmartDashboard.putNumber("str", str);
+	
 		if (fwd == 0.0 && str == 0.0 && rot == 0.0) {
 			// setOffSets();
-			setDriveBrakeMode(true);
-			stopDrive();
+			setAllDriveBrakeMode(true);
+			stopAllDrive();
 		} else {
-			setDriveBrakeMode(false);
+			setAllDriveBrakeMode(false);
 			swerveDrive(fwd, str, rot);
 			// resetOffSet();
 		}
@@ -239,5 +278,89 @@ public class DriveSubsystem extends SubsystemBase {
 	public void tankDrive(double left, double right) {
 		setAllLocation(0);
 		setDrivePower(right, left, right, left);
+	}
+
+	public void getAllAbsPos() {
+		flHome = dtFL.getTurnAbsPos();
+		frHome = dtFR.getTurnAbsPos();
+		rlHome = dtRL.getTurnAbsPos();
+		rrHome = dtRR.getTurnAbsPos();
+	}
+
+	public void saveAllHomes() {
+		try {
+    		f = new File(Constants.DriveTrain.DT_HOMES_FILE);
+    		if(!f.exists()){
+    			f.createNewFile();
+    		}
+			fw = new FileWriter(f);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		bw = new BufferedWriter(fw);
+		String outString = "flHome:"+flHome+"\n";
+		outString += "frHome:"+frHome+"\n";
+		outString += "rlHome:"+rlHome+"\n";
+		outString += "rrHome:"+rrHome+"\n";
+
+		try {
+			bw.write(outString);
+			bw.close();
+			fw.close();
+			//TODO: Log to console what data was written to disk
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void readAllHomes() {
+		//Read values from file and store in private variables
+		f = new File(Constants.DriveTrain.DT_HOMES_FILE);
+		if(!f.exists()){
+			saveAllHomes();
+		}
+		try {
+			fr = new FileReader(f);
+			br = new BufferedReader(fr);
+			//TODO: Log to console what data was read from disk
+			//System.out.println("flOff: " + flOff);
+			String line = br.readLine(); //read all the lines from the file and beg for bread
+			while (line != null) {
+				String part[] = line.split(":",2);
+				switch (part[0]) {
+					case "flHome":
+						flHome = Double.parseDouble(part[1]);
+						break;
+					case "frHome":
+						frHome = Double.parseDouble(part[1]);
+						break;
+					case "rlHome":
+						rlHome = Double.parseDouble(part[1]);
+						break;
+					case "rrHome":
+						rrHome = Double.parseDouble(part[1]);
+						break;
+				}
+			}
+			br.close();
+			fr.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	public void startCalibrationMode() {
+		setAllTurnBrakeMode(false);
+
+		dtFL.setTurnPowerPercent(0);
+		dtFR.setTurnPowerPercent(0);
+        dtRL.setTurnPowerPercent(0);
+        dtRR.setTurnPowerPercent(0);
+	}
+
+	public void stopCalibrationMode() {
+		saveAllHomes();
+		setAllTurnBrakeMode(true);
 	}
 }

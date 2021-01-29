@@ -12,6 +12,8 @@ public class Constants {
 
     public static final class DriveTrain {
         //DriveTrain definitions
+        public final static String DT_HOMES_FILE = "/home/lvuser/swerveHomes.txt"; //The file where we save the homes data to persist reboots
+
         public final static int DT_FL_DRIVE_MC_ID = 2; //Front Left Drive Motor Controller ID //SPARKMAX
         public final static int DT_FL_TURN_MC_ID = 7; //Front Left Turn Motor Controller ID //TALONSRX
         public final static int DT_FL_HOME = 0; //Front Left encoder value at home position
