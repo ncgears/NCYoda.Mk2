@@ -35,7 +35,6 @@ public class SwerveModule {
 	 * @param tD I probably need to know the D constant for the turning PID
 	 * @param tIZone I might not need to know the I Zone value for the turning PID
 	 */
-   
     public SwerveModule(int driveMC_ID, int turnMC_ID, double tP, double tI, double tD, int tIZone){
         drive = new CANSparkMax(driveMC_ID, MotorType.kBrushless);
         turn = new WPI_TalonSRX(turnMC_ID);
@@ -90,7 +89,6 @@ public class SwerveModule {
     public int getTurnRelPos(){
         //relative position
         return turn.getSensorCollection().getQuadraturePosition();
-        //TODO: Resume migration to WPI_TalonSRX
         //https://github.com/CrossTheRoadElec/Phoenix-Documentation/blob/master/Legacy/Migration%20Guide.md
     }
 

@@ -3,6 +3,7 @@ package frc.team1918.robot.subsystems;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.team1918.robot.Constants;
 import frc.team1918.robot.Helpers;
@@ -27,6 +28,9 @@ public class DriveSubsystem extends SubsystemBase {
 	private FileWriter fw;
 	private BufferedReader br;
 	private FileReader fr;
+	private static double l = Constants.Global.ROBOT_LENGTH, w = Constants.Global.ROBOT_WIDTH, r = Math.sqrt((l * l) + (w * w));
+	private static boolean driverManualHomeButton = false, operManualHomeButton = false;
+	private static boolean driveControlsLocked = false; //true while homing operation
 
 	public static DriveSubsystem getInstance() {
 		if (instance == null)
@@ -84,9 +88,6 @@ public class DriveSubsystem extends SubsystemBase {
 		setLocation(loc, loc, loc, loc);
 	}
 
-	//TODO: Move this somewhere that makes more sense, or replace with constants from constants.java
-	private static double l = 26, w = 23, r = Math.sqrt((l * l) + (w * w));
-
 	public static boolean isdtLFTurnEncConnected() {
 		return dtFL.isTurnEncConnected();
 	}
@@ -117,56 +118,6 @@ public class DriveSubsystem extends SubsystemBase {
 		dtRR.stopDrive();
 	}
 
-	private static double angleToLoc(double angle) {
-		if (angle < 0) {
-			return .5d + ((180d - Math.abs(angle)) / 360d);
-		} else {
-			return angle / 360d;
-		}
-	}
-
-	private static boolean offSetSet = false;
-// Dont think setoffsets is needed, perhaps delete the whole shebang
-	public static void setOffSets() {
-		if (!offSetSet) {
-			double flOff = 0, frOff = 0, rlOff = 0, rrOff = 0;
-		    dtFL.setTurnPowerPercent(0);
-			dtRL.setTurnPowerPercent(0);
-			dtFR.setTurnPowerPercent(0);
-			dtRR.setTurnPowerPercent(0);
-
-			flOff = DriveSubsystem.dtFL.getTurnAbsPos();
-			frOff = DriveSubsystem.dtFR.getTurnAbsPos();
-			rlOff = DriveSubsystem.dtRL.getTurnAbsPos();
-			rrOff = DriveSubsystem.dtRR.getTurnAbsPos();
-
-			System.out.println("flOff: " + flOff);
-			System.out.println("frOff: " + frOff);
-			System.out.println("rlOff: " + rlOff);
-			System.out.println("rrOff: " + rrOff);
-
-			resetAllEnc();
-		    dtFL.setEncPos((int) (locSub(flOff, Constants.DriveTrain.DT_FL_HOME) * 4095d));
-			dtFR.setEncPos((int) (locSub(frOff, Constants.DriveTrain.DT_FR_HOME) * 4095d));
-			dtRL.setEncPos((int) (locSub(rlOff, Constants.DriveTrain.DT_RL_HOME) * 4095d));
-			dtRR.setEncPos((int) (locSub(rrOff, Constants.DriveTrain.DT_RR_HOME) * 4095d));
-			offSetSet = true;
-		}
-	}
-
-	public static void resetOffSet() {
-		offSetSet = false;
-	}
-
-	private static double locSub(double v, double c) {
-		if (v - c > 0) {
-			return v - c;
-		} else {
-			return (1 - c) + v;
-		}
-	}
-
-	
 	public static double getgyroAngle() {
 		return gyro.getAngle();
 	}
@@ -251,7 +202,22 @@ public class DriveSubsystem extends SubsystemBase {
 
 		fwd = Helpers.OI.applyDeadband(fwd);
 		str = Helpers.OI.applyDeadband(str);
+		if (Constants.DriveTrain.DT_TURN_MULT_BEFORE_DB) {
+			if (fwd == 0.0 && str == 0.0) {
+				rot *= Constants.DriveTrain.DT_TURN_MULT_STATIONARY;
+			} else {
+				rot *= Constants.DriveTrain.DT_TURN_MULT_MOVING;
+			}
+		}
 		rot = Helpers.OI.applyDeadband(rot);
+		if (!Constants.DriveTrain.DT_TURN_MULT_BEFORE_DB) {
+			if (fwd == 0.0 && str == 0.0) {
+				rot *= Constants.DriveTrain.DT_TURN_MULT_STATIONARY;
+			} else {
+				rot *= Constants.DriveTrain.DT_TURN_MULT_MOVING;
+			}
+		}
+
 		SmartDashboard.putNumber("fwd", fwd);
 		SmartDashboard.putNumber("str", str);
 	
@@ -348,7 +314,16 @@ public class DriveSubsystem extends SubsystemBase {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
 
+	public void moveAllToHomes() {
+		readAllHomes();
+		dtFL.setTurnLocationInEncoderTicks(flHome);
+		dtFR.setTurnLocationInEncoderTicks(frHome);
+		dtRL.setTurnLocationInEncoderTicks(rlHome);
+		dtRR.setTurnLocationInEncoderTicks(rrHome);
+		//WaitCommand(Constants.DriveTrain.DT_HOME_DELAY);
+		//resetAllEnc();
 	}
 
 	public void startCalibrationMode() {
@@ -363,5 +338,9 @@ public class DriveSubsystem extends SubsystemBase {
 	public void stopCalibrationMode() {
 		saveAllHomes();
 		setAllTurnBrakeMode(true);
+	}
+
+	public void lockDriveControls(boolean lock) {
+		driveControlsLocked = lock;
 	}
 }

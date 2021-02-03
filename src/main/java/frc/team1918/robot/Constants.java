@@ -8,11 +8,17 @@ public class Constants {
         public final static int kTimeoutMs = 30; //Timeout for reporting in DS if action fails, set to 0 to skip confirmation
         public final static int PID_PRIMARY = 0;  //Talon PID slot for primary loop
         public final static int PID_TURN = 1; //Talon PID slot for auxillary loop
+        public final static int ROBOT_WIDTH = 23; //Width of the robot frame
+        public final static int ROBOT_LENGTH = 26; //Length of the robot frame
     }
 
     public static final class DriveTrain {
         //DriveTrain definitions
         public final static String DT_HOMES_FILE = "/home/lvuser/swerveHomes.txt"; //The file where we save the homes data to persist reboots
+        public final static double DT_TURN_MULT_STATIONARY = 0.5; //Turn multiplier while not moving
+        public final static double DT_TURN_MULT_MOVING = 0.9; //Turn multiplier while moving
+        public final static boolean DT_TURN_MULT_BEFORE_DB = true; //Apply turn multiplier before deadband
+        public final static double DT_HOME_DELAY = 0.75; //Seconds to wait for homing before reset encoders
 
         public final static int DT_FL_DRIVE_MC_ID = 2; //Front Left Drive Motor Controller ID //SPARKMAX
         public final static int DT_FL_TURN_MC_ID = 7; //Front Left Turn Motor Controller ID //TALONSRX
