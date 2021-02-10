@@ -28,6 +28,8 @@ import frc.team1918.robot.subsystems.MixerSubsystem;
 import frc.team1918.robot.commands.drive_defaultDrive;
 import frc.team1918.robot.commands.ExampleCommand;
 import frc.team1918.robot.commands.shooter_shootWall;
+//CommandGroup imports
+import frc.team1918.robot.commandgroups.cg_drive_autoHome;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -67,7 +69,7 @@ public class RobotContainer {
   private JoystickButton btn_MIXER_FEEDSTUCK = new JoystickButton(dj, Constants.OI.DRIVE_BTN_MIXER_FEEDSTUCK);
   //Operator Controller
   private Joystick oj = new Joystick(Constants.OI.OI_JOY_OPER);
-  JoystickButton btn_SHOOT_WALL = new JoystickButton(oj, Constants.OI.OPER_BTN_SHOOT_WALL);
+  private JoystickButton btn_SHOOT_WALL = new JoystickButton(oj, Constants.OI.OPER_BTN_SHOOT_WALL);
   private JoystickButton btn_SHOOT_LINE = new JoystickButton(oj, Constants.OI.OPER_BTN_SHOOT_LINE);
   private JoystickButton btn_SHOOT_SHORT = new JoystickButton(oj, Constants.OI.OPER_BTN_SHOOT_SHORT);
   private JoystickButton btn_SHOOT_TRENCH = new JoystickButton(oj, Constants.OI.OPER_BTN_SHOOT_TRENCH);
@@ -102,6 +104,7 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    btn_HOMESWERVE.whenPressed(new cg_drive_autoHome(m_drive));
     btn_SHOOT_WALL.whenPressed(new shooter_shootWall(m_shooter));
     // btn_ALLUP.whenPressed(new moveArmUp(m_collector));
     // btn_ANTIGRAV.whenPressed(new engageAntiBackdrive(m_climber)).whenReleased(new disengageAntiBackdrive(m_climber));

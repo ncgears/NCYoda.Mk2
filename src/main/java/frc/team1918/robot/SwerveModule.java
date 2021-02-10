@@ -176,7 +176,7 @@ public class SwerveModule {
                 }
             }
             // SmartDashboard.putString("target","outside quarter rotation");
-        } else {
+        // } else {
             // SmartDashboard.putString("target","within quarter rotation");
         }
         // SmartDashboard.putBoolean("drivePowerInverted",this.isDrivePowerInverted);

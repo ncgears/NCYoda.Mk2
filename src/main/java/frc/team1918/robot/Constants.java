@@ -47,22 +47,22 @@ public class Constants {
         public static enum driveDpadDirection {UP,DOWN,IDLE};
         
         //Logitech Controller buttons
-        private final static int LOGITECH_BTN_A = 0; //A Button
-        private final static int LOGITECH_BTN_B = 1; //B Button
-        private final static int LOGITECH_BTN_X = 2; //X Button
-        private final static int LOGITECH_BTN_Y = 3; //Y Button
-        private final static int LOGITECH_BTN_LB = 4; //Left Bumper (L1)
-        private final static int LOGITECH_BTN_RB = 5; //Right Bumper (R1)
-        private final static int LOGITECH_BTN_BACK = 6; //Back Button (Select)
-        private final static int LOGITECH_BTN_START = 7; //Start Button
-        private final static int LOGITECH_BTN_L = 8; //Left Stick Press (L3)
-        private final static int LOGITECH_BTN_R = 9; //Right Stick Press (R3)
-        private final static int LOGITECH_AXIS_LH = 0; //Left Analog Stick horizontal
-        private final static int LOGITECH_AXIS_LV = 1; //Left Analog Stick vertical
-        private final static int LOGITECH_AXIS_LT = 2; //Analog Left Trigger
-        private final static int LOGITECH_AXIS_RT = 3; //Analog Right Trigger
-        private final static int LOGITECH_AXIS_RH = 4; //Right Analog Stick horizontal
-        private final static int LOGITECH_AXIS_RV = 5; //Right Analog Stick vertical
+        private final static int LOGITECH_BTN_A = 1; //A Button
+        private final static int LOGITECH_BTN_B = 2; //B Button
+        private final static int LOGITECH_BTN_X = 3; //X Button
+        private final static int LOGITECH_BTN_Y = 4; //Y Button
+        private final static int LOGITECH_BTN_LB = 5; //Left Bumper (L1)
+        private final static int LOGITECH_BTN_RB = 6; //Right Bumper (R1)
+        private final static int LOGITECH_BTN_BACK = 7; //Back Button (Select)
+        private final static int LOGITECH_BTN_START = 8; //Start Button
+        private final static int LOGITECH_BTN_L = 9; //Left Stick Press (L3)
+        private final static int LOGITECH_BTN_R = 10; //Right Stick Press (R3)
+        private final static int LOGITECH_AXIS_LH = 1; //Left Analog Stick horizontal
+        private final static int LOGITECH_AXIS_LV = 2; //Left Analog Stick vertical
+        private final static int LOGITECH_AXIS_LT = 3; //Analog Left Trigger
+        private final static int LOGITECH_AXIS_RT = 4; //Analog Right Trigger
+        private final static int LOGITECH_AXIS_RH = 5; //Right Analog Stick horizontal
+        private final static int LOGITECH_AXIS_RV = 6; //Right Analog Stick vertical
         private final static int LOGITECH_DPAD_UP = 0;
         private final static int LOGITECH_DPAD_UPRIGHT = 45;
         private final static int LOGITECH_DPAD_RIGHT = 90;
