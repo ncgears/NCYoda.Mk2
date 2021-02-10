@@ -37,4 +37,8 @@ public class drive_moveAllToHomes extends CommandBase {
     m_drive.moveAllToHomes();
   }
 
+  @Override
+  public boolean isFinished() {
+    return true;
+  }
 }

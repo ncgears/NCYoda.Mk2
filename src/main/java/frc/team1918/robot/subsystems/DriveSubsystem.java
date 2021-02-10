@@ -40,13 +40,13 @@ public class DriveSubsystem extends SubsystemBase {
 
 	public DriveSubsystem() {
 	    dtFL = new SwerveModule(Constants.DriveTrain.DT_FL_DRIVE_MC_ID,
-				Constants.DriveTrain.DT_FL_TURN_MC_ID, 3.0, 0, 50, 0); // Front Left //izone was 200  // 3,0,50,0
+				Constants.DriveTrain.DT_FL_TURN_MC_ID, 3.0, 0, 50, 0, "dtFL"); // Front Left //izone was 200  // 3,0,50,0
 		dtFR = new SwerveModule(Constants.DriveTrain.DT_FR_DRIVE_MC_ID,
-				Constants.DriveTrain.DT_FR_TURN_MC_ID, 3.0, 0, 50, 0); // Front Right
+				Constants.DriveTrain.DT_FR_TURN_MC_ID, 3.0, 0, 50, 0, "dtFR"); // Front Right
 		dtRL = new SwerveModule(Constants.DriveTrain.DT_RL_DRIVE_MC_ID,
-				Constants.DriveTrain.DT_RL_TURN_MC_ID, 3.0, 0, 50, 0); // Rear Left
+				Constants.DriveTrain.DT_RL_TURN_MC_ID, 3.0, 0, 50, 0, "dtRL"); // Rear Left
 		dtRR = new SwerveModule(Constants.DriveTrain.DT_RR_DRIVE_MC_ID,
-                Constants.DriveTrain.DT_RR_TURN_MC_ID, 3.0, 0, 50, 0); // Rear Right
+                Constants.DriveTrain.DT_RR_TURN_MC_ID, 3.0, 0, 50, 0, "dtRR"); // Rear Right
 
 		gyro = new AHRS(SPI.Port.kMXP);
 	}
@@ -105,11 +105,11 @@ public class DriveSubsystem extends SubsystemBase {
 	}
 
 	public void resetAllEnc() {
+		System.out.print("resetAllEnc\n");
 	    dtFL.resetTurnEnc();
 		dtFR.resetTurnEnc();
 		dtRL.resetTurnEnc();
 		dtRR.resetTurnEnc();
-		System.out.print("resetAllEnc");
 	}
 
 	public static void stopAllDrive() {
@@ -319,15 +319,16 @@ public class DriveSubsystem extends SubsystemBase {
 	}
 
 	public void moveAllToHomes() {
+		System.out.print("moveAllToHomes\n");
 		readAllHomes();
 		dtFL.setTurnLocationInEncoderTicks(flHome);
 		dtFR.setTurnLocationInEncoderTicks(frHome);
 		dtRL.setTurnLocationInEncoderTicks(rlHome);
 		dtRR.setTurnLocationInEncoderTicks(rrHome);
-		System.out.print("moveAllToHomes");
 	}
 
 	public void startCalibrationMode() {
+		System.out.print("startCalibrationMode\n");
 		setAllTurnBrakeMode(false);
 
 		dtFL.setTurnPowerPercent(0);
@@ -337,12 +338,13 @@ public class DriveSubsystem extends SubsystemBase {
 	}
 
 	public void stopCalibrationMode() {
+		System.out.print("stopCalibrationMode\n");
 		saveAllHomes();
 		setAllTurnBrakeMode(true);
 	}
 
 	public void lockDriveControls(boolean lock) {
 		driveControlsLocked = lock;
-		System.out.print("drive controls lock state: " + lock);
+		System.out.print("drive controls lock state: " + lock + "\n");
 	}
 }

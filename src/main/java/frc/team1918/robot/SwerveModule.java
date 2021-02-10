@@ -23,6 +23,7 @@ public class SwerveModule {
     private final double FULL_ROTATION = 4096d, TURN_P, TURN_I, TURN_D;
     private final int TURN_IZONE;
     private boolean isDrivePowerInverted = false;
+    private String moduleName;
 
 //SparkMAX Java API Doc: https://www.revrobotics.com/content/sw/max/sw-docs/java/index.html
 
@@ -35,9 +36,10 @@ public class SwerveModule {
 	 * @param tD I probably need to know the D constant for the turning PID
 	 * @param tIZone I might not need to know the I Zone value for the turning PID
 	 */
-    public SwerveModule(int driveMC_ID, int turnMC_ID, double tP, double tI, double tD, int tIZone){
+    public SwerveModule(int driveMC_ID, int turnMC_ID, double tP, double tI, double tD, int tIZone, String name){
         drive = new CANSparkMax(driveMC_ID, MotorType.kBrushless);
         turn = new WPI_TalonSRX(turnMC_ID);
+        moduleName = name;
 
         turn.configFactoryDefault(); //Reset controller to factory defaults to avoid wierd stuff
         turn.set(ControlMode.PercentOutput, 0); //Set controller to disabled
@@ -104,7 +106,8 @@ public class SwerveModule {
      * Reset encoder to 0
      */
     public void resetTurnEnc() {
-		this.turn.getSensorCollection().setQuadraturePosition(0,10);
+        System.out.print(moduleName + " resetTurnEnc\n");
+		turn.getSensorCollection().setQuadraturePosition(0,10);
     }
 // Why does the line above start with "this." and the one below does not? Does it matter?
     public void setEncPos(int d) { //reset encoder position

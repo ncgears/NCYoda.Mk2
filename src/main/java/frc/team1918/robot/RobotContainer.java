@@ -26,6 +26,9 @@ import frc.team1918.robot.subsystems.ShooterSubsystem;
 import frc.team1918.robot.subsystems.MixerSubsystem;
 //Commands imports
 import frc.team1918.robot.commands.drive_defaultDrive;
+import frc.team1918.robot.commands.drive_startCalibration;
+import frc.team1918.robot.commands.drive_stopCalibration;
+//samples
 import frc.team1918.robot.commands.ExampleCommand;
 import frc.team1918.robot.commands.shooter_shootWall;
 //CommandGroup imports
@@ -67,6 +70,8 @@ public class RobotContainer {
   private JoystickButton btn_HOMESWERVE = new JoystickButton(dj, Constants.OI.DRIVE_BTN_HOMESWERVE);
   private JoystickButton btn_MIXER_FEED = new JoystickButton(dj, Constants.OI.DRIVE_BTN_MIXER_FEED);
   private JoystickButton btn_MIXER_FEEDSTUCK = new JoystickButton(dj, Constants.OI.DRIVE_BTN_MIXER_FEEDSTUCK);
+  private JoystickButton btn_CALIBRATE_START = new JoystickButton(dj, Constants.OI.DRIVE_BTN_CALIBRATE_START);
+  private JoystickButton btn_CALIBRATE_STOP = new JoystickButton(dj, Constants.OI.DRIVE_BTN_CALIBRATE_STOP);
   //Operator Controller
   private Joystick oj = new Joystick(Constants.OI.OI_JOY_OPER);
   private JoystickButton btn_SHOOT_WALL = new JoystickButton(oj, Constants.OI.OPER_BTN_SHOOT_WALL);
@@ -105,6 +110,9 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     btn_HOMESWERVE.whenPressed(new cg_drive_autoHome(m_drive));
+    btn_CALIBRATE_START.whenPressed(new drive_startCalibration(m_drive));
+    btn_CALIBRATE_STOP.whenPressed(new drive_stopCalibration(m_drive));
+    //
     btn_SHOOT_WALL.whenPressed(new shooter_shootWall(m_shooter));
     // btn_ALLUP.whenPressed(new moveArmUp(m_collector));
     // btn_ANTIGRAV.whenPressed(new engageAntiBackdrive(m_climber)).whenReleased(new disengageAntiBackdrive(m_climber));

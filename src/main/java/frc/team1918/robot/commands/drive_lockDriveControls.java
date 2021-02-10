@@ -39,4 +39,8 @@ public class drive_lockDriveControls extends CommandBase {
     m_drive.lockDriveControls(m_lock);
   }
 
+  @Override
+  public boolean isFinished() {
+    return true;
+  }
 }

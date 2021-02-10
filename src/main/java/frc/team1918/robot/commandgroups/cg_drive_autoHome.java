@@ -47,7 +47,7 @@ public class cg_drive_autoHome extends SequentialCommandGroup {
         //this is a comma separated list of commands, thus, the last one should not have a comma
         new drive_lockDriveControls(m_drive, true),
         new drive_moveAllToHomes(m_drive),
-        new WaitCommand(Constants.DriveTrain.DT_HOME_DELAY),
+        //new WaitCommand(Constants.DriveTrain.DT_HOME_DELAY),
         new drive_resetAllEnc(m_drive),
         new drive_lockDriveControls(m_drive, false)
     );

@@ -37,4 +37,8 @@ public class drive_resetAllEnc extends CommandBase {
     m_drive.resetAllEnc();
   }
 
+  @Override
+  public boolean isFinished() {
+    return true;
+  }
 }

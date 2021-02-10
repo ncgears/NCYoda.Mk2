@@ -73,6 +73,9 @@ public class Constants {
         private final static int LOGITECH_DPAD_UPLEFT = 315;
         private final static int LOGITECH_DPAD_IDLE = -1; 
     
+        public final static int DRIVE_BTN_CALIBRATE_START = LOGITECH_BTN_B; //temporary for testing
+        public final static int DRIVE_BTN_CALIBRATE_STOP = LOGITECH_BTN_A; //temporary for testing
+
         public final static int DRIVE_AXIS_STRAFE = LOGITECH_AXIS_LH; //Axis that moves the robot side to side on the field
         public final static int DRIVE_AXIS_FWD = LOGITECH_AXIS_LV; //Axis that moves the robot up and down the field
         public final static int DRIVE_AXIS_TURN = LOGITECH_AXIS_RH; //Axis that controls the rotation of the robot
