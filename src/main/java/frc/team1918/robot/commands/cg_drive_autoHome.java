@@ -18,6 +18,7 @@ import frc.team1918.robot.Constants;
 
 import frc.team1918.robot.commands.drive_lockDriveControls;
 import frc.team1918.robot.commands.drive_moveAllToHomes;
+import frc.team1918.robot.commands.drive_resetAllEnc;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 /**
@@ -25,7 +26,7 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
  * explicitly for pedagogical purposes - actual code should inline a command this simple with {@link
  * edu.wpi.first.wpilibj2.command.RunCommand}.
  */
-public class drive_cg_autoHome extends SequentialCommandGroup {
+public class cg_drive_autoHome extends SequentialCommandGroup {
   private final DriveSubsystem m_drive;
 
 
@@ -34,7 +35,7 @@ public class drive_cg_autoHome extends SequentialCommandGroup {
    *
    * @param subsystem The drive subsystem this command will run on.
    */
-  public drive_cg_autoHome(DriveSubsystem subsystem) {
+  public cg_drive_autoHome(DriveSubsystem subsystem) {
     m_drive = subsystem;
     addRequirements(m_drive);
 
@@ -47,6 +48,7 @@ public class drive_cg_autoHome extends SequentialCommandGroup {
         new drive_lockDriveControls(m_drive, true),
         new drive_moveAllToHomes(m_drive),
         new WaitCommand(Constants.DriveTrain.DT_HOME_DELAY),
+        new drive_resetAllEnc(m_drive),
         new drive_lockDriveControls(m_drive, false)
     );
   }

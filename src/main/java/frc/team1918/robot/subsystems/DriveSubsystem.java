@@ -104,7 +104,7 @@ public class DriveSubsystem extends SubsystemBase {
 		return dtRR.isTurnEncConnected();
 	}
 
-	public static void resetAllEnc() {
+	public void resetAllEnc() {
 	    dtFL.resetTurnEnc();
 		dtFR.resetTurnEnc();
 		dtRL.resetTurnEnc();
@@ -322,8 +322,6 @@ public class DriveSubsystem extends SubsystemBase {
 		dtFR.setTurnLocationInEncoderTicks(frHome);
 		dtRL.setTurnLocationInEncoderTicks(rlHome);
 		dtRR.setTurnLocationInEncoderTicks(rrHome);
-		//WaitCommand(Constants.DriveTrain.DT_HOME_DELAY);
-		//resetAllEnc();
 	}
 
 	public void startCalibrationMode() {
