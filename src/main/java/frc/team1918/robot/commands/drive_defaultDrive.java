@@ -42,7 +42,9 @@ public class drive_defaultDrive extends CommandBase {
 // If we remove "DriveSubsystem subsystem" input above and below make it "RobotContainer.m_drive", would this accomplish the same thing?
   @Override
   public void execute() {
-    m_drive.humanDrive(m_forward.getAsDouble(), m_strafe.getAsDouble(), m_rotation.getAsDouble());
-    //could also be m_drive.fieldCentricDrive
+    if (!m_drive.isDriveControlsLocked()){
+      m_drive.humanDrive(m_forward.getAsDouble(), m_strafe.getAsDouble(), m_rotation.getAsDouble());
+      //could also be m_drive.fieldCentricDrive
+    }
   }
 }

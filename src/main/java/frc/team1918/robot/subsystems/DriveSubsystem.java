@@ -21,7 +21,7 @@ public class DriveSubsystem extends SubsystemBase {
 	private static DriveSubsystem instance;
 	private static SwerveModule dtFL, dtFR, dtRL, dtRR;
 	private static AHRS gyro;
-	private static double flHome = 0, frHome = 0, rlHome = 0, rrHome = 0;
+	private static int flHome = 0, frHome = 0, rlHome = 0, rrHome = 0;
 	private static boolean isFirstTime = true;
 	private File f;
 	private BufferedWriter bw;
@@ -252,6 +252,12 @@ public class DriveSubsystem extends SubsystemBase {
 		frHome = dtFR.getTurnAbsPos();
 		rlHome = dtRL.getTurnAbsPos();
 		rrHome = dtRR.getTurnAbsPos();
+
+		String outString = "flHome:"+flHome;
+		outString += " frHome:"+frHome;
+		outString += " rlHome:"+rlHome;
+		outString += " rrHome:"+rrHome;
+		System.out.print("getAllAbsPos: " + outString+"\n");
 	}
 
 	public void saveAllHomes() {
@@ -290,23 +296,27 @@ public class DriveSubsystem extends SubsystemBase {
 		try {
 			fr = new FileReader(f);
 			br = new BufferedReader(fr);
-			//TODO: Log to console what data was read from disk
-			//System.out.println("flOff: " + flOff);
 			String line = br.readLine(); //read all the lines from the file and beg for bread
 			while (line != null) {
+				// System.out.print("readAllHomes line="+line+"\n");
 				String part[] = line.split(":",2);
+				// System.out.print("readAllHomes part0="+part[0]+"\n");
 				switch (part[0]) {
 					case "flHome":
-						flHome = Double.parseDouble(part[1]);
+						flHome = Integer.parseInt(part[1]);
+						System.out.print("readAllHomes: flHome="+flHome+"\n");
 						break;
 					case "frHome":
-						frHome = Double.parseDouble(part[1]);
+						frHome = Integer.parseInt(part[1]);
+						System.out.print("readAllHomes: frHome="+frHome+"\n");
 						break;
 					case "rlHome":
-						rlHome = Double.parseDouble(part[1]);
+						rlHome = Integer.parseInt(part[1]);
+						System.out.print("readAllHomes: rlHome="+rlHome+"\n");
 						break;
 					case "rrHome":
-						rrHome = Double.parseDouble(part[1]);
+						rrHome = Integer.parseInt(part[1]);
+						System.out.print("readAllHomes: rrHome="+rrHome+"\n");
 						break;
 				}
 				line = br.readLine(); //beg for more bread
@@ -339,8 +349,14 @@ public class DriveSubsystem extends SubsystemBase {
 
 	public void stopCalibrationMode() {
 		System.out.print("stopCalibrationMode\n");
+		getAllAbsPos();
 		saveAllHomes();
+		// readAllHomes();
 		setAllTurnBrakeMode(true);
+	}
+
+	public boolean isDriveControlsLocked() {
+		return driveControlsLocked;
 	}
 
 	public void lockDriveControls(boolean lock) {

@@ -97,9 +97,9 @@ public class SwerveModule {
     /**
      * @return encoder absolute position
      */
-    public double getTurnAbsPos(){
+    public int getTurnAbsPos(){
         //absolute position
-        return (turn.getSensorCollection().getPulseWidthPosition() & 0xFFF) / 4095d;
+        return (turn.getSensorCollection().getPulseWidthPosition() & 0xFFF);
     }
 
     /**
@@ -221,6 +221,14 @@ public class SwerveModule {
 
     public void setTurnPowerPercent(double p) {
            turn.set(ControlMode.PercentOutput, p);
+    }
+
+    public void setTurnEncoderAbsolute(boolean useAbsolute) {
+        if (useAbsolute) {
+            turn.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, Constants.Global.PID_PRIMARY, Constants.Global.kTimeoutMs);
+        } else {
+            turn.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, Constants.Global.PID_PRIMARY, Constants.Global.kTimeoutMs);
+        }
     }
 
     public void setTurnLocationInEncoderTicks(double et) {

@@ -43,7 +43,7 @@ import frc.team1918.robot.commandgroups.cg_drive_autoHome;
 public class RobotContainer {
   //Here, we initialize the subsystems and commands that will be used for the button bindings
   //generic subsystems
-  private final PowerDistributionPanel pdp = new PowerDistributionPanel();
+  private final PowerDistributionPanel m_pdp = new PowerDistributionPanel();
   //team 1918 subsystems
   private final ClimberSubsystem m_climber = new ClimberSubsystem();
   private final CollectorSubsystem m_collector = new CollectorSubsystem();
