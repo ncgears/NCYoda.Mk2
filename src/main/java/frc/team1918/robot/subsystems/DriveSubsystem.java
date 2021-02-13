@@ -339,6 +339,7 @@ public class DriveSubsystem extends SubsystemBase {
 
 	public void startCalibrationMode() {
 		System.out.print("startCalibrationMode\n");
+		lockDriveControls(true);
 		setAllTurnBrakeMode(false);
 
 		dtFL.setTurnPowerPercent(0);
@@ -353,6 +354,7 @@ public class DriveSubsystem extends SubsystemBase {
 		saveAllHomes();
 		// readAllHomes();
 		setAllTurnBrakeMode(true);
+		lockDriveControls(false);
 	}
 
 	public boolean isDriveControlsLocked() {
