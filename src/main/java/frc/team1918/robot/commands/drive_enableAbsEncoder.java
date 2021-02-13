@@ -18,9 +18,9 @@ import frc.team1918.robot.subsystems.DriveSubsystem;
  * explicitly for pedagogical purposes - actual code should inline a command this simple with {@link
  * edu.wpi.first.wpilibj2.command.RunCommand}.
  */
-public class drive_lockDriveControls extends CommandBase {
+public class drive_enableAbsEncoder extends CommandBase {
   private final DriveSubsystem m_drive;
-  private final boolean m_lock;
+  private final boolean m_enable;
 
 
   /**
@@ -28,15 +28,15 @@ public class drive_lockDriveControls extends CommandBase {
    *
    * @param subsystem The drive subsystem this command will run on.
    */
-  public drive_lockDriveControls(DriveSubsystem subsystem, boolean lock) {
+  public drive_enableAbsEncoder(DriveSubsystem subsystem, boolean enable) {
     m_drive = subsystem;
-    m_lock = lock;
+    m_enable = enable;
     addRequirements(m_drive);
   }
 
   @Override
   public void execute() {
-    m_drive.lockDriveControls(m_lock);
+    m_drive.setAllTurnEncoderAbsolute(m_enable);
   }
 
   @Override

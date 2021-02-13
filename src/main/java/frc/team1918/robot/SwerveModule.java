@@ -102,6 +102,21 @@ public class SwerveModule {
         return (turn.getSensorCollection().getPulseWidthPosition() & 0xFFF);
     }
 
+    public boolean isTurnAtHome(int homePos) {
+        int currentPos = getTurnAbsPos();
+        int marginErr = Constants.DriveTrain.DT_HOME_MARGIN_OF_ERROR;
+        int offset = (homePos < marginErr || homePos > 4095 - marginErr) ? 1024 : 0;
+
+        int lowHome = homePos + offset - marginErr; //could use this value % 4096
+        int highHome = homePos + offset + marginErr;
+        
+        lowHome -= (lowHome > 4095) ? 4096 : 0;
+        highHome -= (highHome > 4095) ? 4096 : 0;
+        currentPos -= (currentPos + offset > 4095) ? 4096 : 0;
+
+        return (currentPos + offset <= highHome && currentPos + offset >= lowHome) ? true : false;
+    }
+
     /**
      * Reset encoder to 0
      */
@@ -109,7 +124,7 @@ public class SwerveModule {
         System.out.print(moduleName + " resetTurnEnc\n");
 		turn.getSensorCollection().setQuadraturePosition(0,10);
     }
-// Why does the line above start with "this." and the one below does not? Does it matter?
+
     public void setEncPos(int d) { //reset encoder position
         turn.getSensorCollection().setQuadraturePosition(d,10);
     }

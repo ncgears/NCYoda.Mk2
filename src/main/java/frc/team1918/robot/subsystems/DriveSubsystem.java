@@ -372,4 +372,16 @@ public class DriveSubsystem extends SubsystemBase {
 		dtRL.setTurnEncoderAbsolute(useAbsolute);
 		dtRR.setTurnEncoderAbsolute(useAbsolute);
 	}
+
+	public boolean isAllTurnAtHome() {
+		if (
+			dtFL.isTurnAtHome(flHome) &&
+			dtFR.isTurnAtHome(frHome) &&
+			dtRL.isTurnAtHome(rlHome) &&
+			dtRR.isTurnAtHome(rrHome)
+			) {
+				return true;
+			}
+		return false;
+	}
 }

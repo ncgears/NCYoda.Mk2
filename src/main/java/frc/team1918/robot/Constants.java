@@ -19,6 +19,7 @@ public class Constants {
         public final static double DT_TURN_MULT_MOVING = 0.9; //Turn multiplier while moving
         public final static boolean DT_TURN_MULT_BEFORE_DB = true; //Apply turn multiplier before deadband
         public final static double DT_HOME_DELAY = 0.75; //Seconds to wait for homing before reset encoders
+        public final static int DT_HOME_MARGIN_OF_ERROR = 20; //Encoder ticks margin to consider home (plus or minus this amount)
 
         public final static int DT_FL_DRIVE_MC_ID = 2; //Front Left Drive Motor Controller ID //SPARKMAX
         public final static int DT_FL_TURN_MC_ID = 7; //Front Left Turn Motor Controller ID //TALONSRX
