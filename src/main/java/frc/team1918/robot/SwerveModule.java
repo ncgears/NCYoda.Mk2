@@ -116,10 +116,10 @@ public class SwerveModule {
         currentPos -= (currentPos + offset > 4095) ? 4096 : 0;
 
         if (currentPos + offset <= highHome && currentPos + offset >= lowHome) {
-            System.out.print(moduleName + " isTurnAtHome = true\n");
+            System.out.print(moduleName + " isTurnAtHome=true; current="+currentPos+"; target="+homePos+";\n");
             return true;
         } else {
-            System.out.print(moduleName + " isTurnAtHome = false\n");
+            System.out.print(moduleName + " isTurnAtHome=false; current="+currentPos+"; target="+homePos+";\n");
             return false;
         }
     }
@@ -155,10 +155,6 @@ public class SwerveModule {
 
     public double getTurnLocation() {
         return (turn.getSensorCollection().getQuadraturePosition() % FULL_ROTATION) / FULL_ROTATION;
-    }
-
-    public void setTurnPIDToSetPoint(double setpoint) {
-        turn.set(ControlMode.Position, setpoint);
     }
 
     /**
@@ -207,6 +203,7 @@ public class SwerveModule {
         // SmartDashboard.putBoolean("drivePowerInverted",this.isDrivePowerInverted);
         // SmartDashboard.putNumber("targetAngleOut", targetAngle);
         turn.set(ControlMode.Position,targetAngle);
+        System.out.print(moduleName + " setTurnLocation = "+targetAngle+"\n");
     }
     
     public double getError() {
@@ -250,7 +247,7 @@ public class SwerveModule {
             turn.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, Constants.Global.PID_PRIMARY, Constants.Global.kTimeoutMs);
         } else {
             turn.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, Constants.Global.PID_PRIMARY, Constants.Global.kTimeoutMs);
-            if (this.absEncoderEnabled == useAbsolute) {
+            if (this.absEncoderEnabled != useAbsolute) {
                 //if we just switched to relative, change the setpoint to 0
                 setTurnLocationInEncoderTicks(0.0);
             }
@@ -259,6 +256,7 @@ public class SwerveModule {
     }
 
     public void setTurnLocationInEncoderTicks(double et) {
+        // System.out.print(moduleName + " setTurnLocationInEncoderTicks = "+et+"\n");
         turn.set(ControlMode.Position, et);
     }
 }
