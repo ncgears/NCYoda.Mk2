@@ -24,6 +24,7 @@ public class SwerveModule {
     private final int TURN_IZONE;
     private boolean isDrivePowerInverted = false;
     private String moduleName;
+    private boolean absEncoderEnabled = false;
 
 //SparkMAX Java API Doc: https://www.revrobotics.com/content/sw/max/sw-docs/java/index.html
 
@@ -249,7 +250,12 @@ public class SwerveModule {
             turn.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, Constants.Global.PID_PRIMARY, Constants.Global.kTimeoutMs);
         } else {
             turn.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, Constants.Global.PID_PRIMARY, Constants.Global.kTimeoutMs);
+            if (this.absEncoderEnabled == useAbsolute) {
+                //if we just switched to relative, change the setpoint to 0
+                setTurnLocationInEncoderTicks(0.0);
+            }
         }
+        this.absEncoderEnabled = useAbsolute;
     }
 
     public void setTurnLocationInEncoderTicks(double et) {

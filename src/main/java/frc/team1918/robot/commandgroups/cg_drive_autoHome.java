@@ -48,7 +48,7 @@ public class cg_drive_autoHome extends SequentialCommandGroup {
         new drive_lockDriveControls(m_drive, true),
         new drive_enableAbsEncoder(m_drive, true),
         new drive_moveAllToHomes(m_drive),
-        //new WaitCommand(Constants.DriveTrain.DT_HOME_DELAY),
+        //new WaitCommand(Constants.DriveTrain.DT_HOME_DELAY),  //we dont need this, we added logic to the isFinished of moveAllToHomes
         new drive_resetAllEnc(m_drive),
         new drive_enableAbsEncoder(m_drive, false),
         new drive_lockDriveControls(m_drive, false)
