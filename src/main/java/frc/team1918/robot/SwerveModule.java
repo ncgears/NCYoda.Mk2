@@ -114,7 +114,12 @@ public class SwerveModule {
         highHome -= (highHome > 4095) ? 4096 : 0;
         currentPos -= (currentPos + offset > 4095) ? 4096 : 0;
 
-        return (currentPos + offset <= highHome && currentPos + offset >= lowHome) ? true : false;
+        if (currentPos + offset <= highHome && currentPos + offset >= lowHome) {
+            System.out.print(moduleName + " isTurnAtHome = true\n");
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**

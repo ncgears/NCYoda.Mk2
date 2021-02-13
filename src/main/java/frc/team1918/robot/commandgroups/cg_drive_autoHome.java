@@ -15,7 +15,7 @@ import java.util.function.DoubleSupplier;
 
 import frc.team1918.robot.subsystems.DriveSubsystem;
 import frc.team1918.robot.Constants;
-
+import frc.team1918.robot.commands.drive_enableAbsEncoder;
 import frc.team1918.robot.commands.drive_lockDriveControls;
 import frc.team1918.robot.commands.drive_moveAllToHomes;
 import frc.team1918.robot.commands.drive_resetAllEnc;
@@ -46,9 +46,11 @@ public class cg_drive_autoHome extends SequentialCommandGroup {
     addCommands(
         //this is a comma separated list of commands, thus, the last one should not have a comma
         new drive_lockDriveControls(m_drive, true),
+        new drive_enableAbsEncoder(m_drive, true),
         new drive_moveAllToHomes(m_drive),
         //new WaitCommand(Constants.DriveTrain.DT_HOME_DELAY),
         new drive_resetAllEnc(m_drive),
+        new drive_enableAbsEncoder(m_drive, false),
         new drive_lockDriveControls(m_drive, false)
     );
   }
