@@ -304,19 +304,19 @@ public class DriveSubsystem extends SubsystemBase {
 				switch (part[0]) {
 					case "flHome":
 						flHome = Integer.parseInt(part[1]);
-						System.out.print("readAllHomes: flHome="+flHome+"\n");
+						// System.out.print("readAllHomes: flHome="+flHome+"\n");
 						break;
 					case "frHome":
 						frHome = Integer.parseInt(part[1]);
-						System.out.print("readAllHomes: frHome="+frHome+"\n");
+						// System.out.print("readAllHomes: frHome="+frHome+"\n");
 						break;
 					case "rlHome":
 						rlHome = Integer.parseInt(part[1]);
-						System.out.print("readAllHomes: rlHome="+rlHome+"\n");
+						// System.out.print("readAllHomes: rlHome="+rlHome+"\n");
 						break;
 					case "rrHome":
 						rrHome = Integer.parseInt(part[1]);
-						System.out.print("readAllHomes: rrHome="+rrHome+"\n");
+						// System.out.print("readAllHomes: rrHome="+rrHome+"\n");
 						break;
 				}
 				line = br.readLine(); //beg for more bread

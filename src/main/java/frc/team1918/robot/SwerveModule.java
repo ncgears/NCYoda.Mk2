@@ -118,6 +118,7 @@ public class SwerveModule {
             System.out.print(moduleName + " isTurnAtHome = true\n");
             return true;
         } else {
+            System.out.print(moduleName + " isTurnAtHome = false\n");
             return false;
         }
     }
