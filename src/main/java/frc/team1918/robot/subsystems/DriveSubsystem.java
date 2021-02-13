@@ -363,4 +363,11 @@ public class DriveSubsystem extends SubsystemBase {
 		driveControlsLocked = lock;
 		System.out.print("drive controls lock state: " + lock + "\n");
 	}
+
+	public void setAllTurnEncoderAbsolute(boolean useAbsolute) {
+		dtFL.setTurnEncoderAbsolute(useAbsolute);
+		dtFR.setTurnEncoderAbsolute(useAbsolute);
+		dtRL.setTurnEncoderAbsolute(useAbsolute);
+		dtRR.setTurnEncoderAbsolute(useAbsolute);
+	}
 }
