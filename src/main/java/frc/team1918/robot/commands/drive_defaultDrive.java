@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import java.util.function.DoubleSupplier;
 //import edu.wpi.first.wpilibj2.command.CommandBase;
 
+import frc.team1918.robot.Constants;
 import frc.team1918.robot.subsystems.DriveSubsystem;
 
 /**
@@ -43,8 +44,11 @@ public class drive_defaultDrive extends CommandBase {
   @Override
   public void execute() {
     if (!m_drive.isDriveControlsLocked()){
-      m_drive.humanDrive(m_forward.getAsDouble(), m_strafe.getAsDouble(), m_rotation.getAsDouble());
-      //could also be m_drive.fieldCentricDrive
+      if (Constants.DriveTrain.DT_USE_FIELD_CENTRIC) {
+        m_drive.fieldCentricDrive(m_forward.getAsDouble(), m_strafe.getAsDouble(), m_rotation.getAsDouble());
+      } else {
+        m_drive.humanDrive(m_forward.getAsDouble(), m_strafe.getAsDouble(), m_rotation.getAsDouble());
+      }
     }
   }
 }
