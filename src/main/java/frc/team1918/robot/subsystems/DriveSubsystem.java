@@ -188,18 +188,23 @@ public class DriveSubsystem extends SubsystemBase {
 		SmartDashboard.putNumber("wa3", wa3);
 		SmartDashboard.putNumber("wa4", wa4);
 
-		DriveSubsystem.setDrivePower(ws4, ws1, ws2, ws3);
-		DriveSubsystem.setLocation(wa4, wa1, wa2, wa3);
+		DriveSubsystem.setDrivePower(ws4, ws1, ws3, ws2);
+		DriveSubsystem.setLocation(wa4, wa1, wa3, wa2);
 	}
 
 	public void humanDrive(double fwd, double str, double rot) {
+		// System.out.println("humanDrive: fwd="+fwd+"; str="+str+"; rot="+rot);
 		if (isFirstTime) {
 			//dtFL.setEncPos(0); //same as dtFL.resetTurnEnc()
 			resetAllEnc();
 			isFirstTime = false;
 		}
 
-		if (Math.abs(rot) < 0.01) rot = 0;
+		SmartDashboard.putNumber("fwd", fwd);
+		SmartDashboard.putNumber("str", str);
+		SmartDashboard.putNumber("rot", rot);
+		
+		// if (Math.abs(rot) < 0.01) rot = 0;
 
 		fwd = Helpers.OI.applyDeadband(fwd);
 		str = Helpers.OI.applyDeadband(str);
@@ -219,9 +224,6 @@ public class DriveSubsystem extends SubsystemBase {
 			}
 		}
 
-		SmartDashboard.putNumber("fwd", fwd);
-		SmartDashboard.putNumber("str", str);
-	
 		if (fwd == 0.0 && str == 0.0 && rot == 0.0) {
 			// setOffSets();
 			setAllDriveBrakeMode(true);

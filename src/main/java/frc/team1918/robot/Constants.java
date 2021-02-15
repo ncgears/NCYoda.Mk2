@@ -48,7 +48,7 @@ public class Constants {
         public final static double OI_JOY_DEADBAND = 0.1; //Deadband for analog joystick axis
         public static enum driveDpadDirection {UP,DOWN,IDLE};
         
-        //Logitech Controller buttons
+        //Logitech Controller buttons  //In Java, buttons are 1-based array, BUT NOT AXIS
         private final static int LOGITECH_BTN_A = 1; //A Button
         private final static int LOGITECH_BTN_B = 2; //B Button
         private final static int LOGITECH_BTN_X = 3; //X Button
@@ -59,12 +59,12 @@ public class Constants {
         private final static int LOGITECH_BTN_START = 8; //Start Button
         private final static int LOGITECH_BTN_L = 9; //Left Stick Press (L3)
         private final static int LOGITECH_BTN_R = 10; //Right Stick Press (R3)
-        private final static int LOGITECH_AXIS_LH = 1; //Left Analog Stick horizontal
-        private final static int LOGITECH_AXIS_LV = 2; //Left Analog Stick vertical
-        private final static int LOGITECH_AXIS_LT = 3; //Analog Left Trigger
-        private final static int LOGITECH_AXIS_RT = 4; //Analog Right Trigger
-        private final static int LOGITECH_AXIS_RH = 5; //Right Analog Stick horizontal
-        private final static int LOGITECH_AXIS_RV = 6; //Right Analog Stick vertical
+        private final static int LOGITECH_AXIS_LH = 0; //Left Analog Stick horizontal
+        private final static int LOGITECH_AXIS_LV = 1; //Left Analog Stick vertical
+        private final static int LOGITECH_AXIS_LT = 2; //Analog Left Trigger
+        private final static int LOGITECH_AXIS_RT = 3; //Analog Right Trigger
+        private final static int LOGITECH_AXIS_RH = 4; //Right Analog Stick horizontal
+        private final static int LOGITECH_AXIS_RV = 5; //Right Analog Stick vertical
         private final static int LOGITECH_DPAD_UP = 0;
         private final static int LOGITECH_DPAD_UPRIGHT = 45;
         private final static int LOGITECH_DPAD_RIGHT = 90;

@@ -203,7 +203,7 @@ public class SwerveModule {
         // SmartDashboard.putBoolean("drivePowerInverted",this.isDrivePowerInverted);
         // SmartDashboard.putNumber("targetAngleOut", targetAngle);
         turn.set(ControlMode.Position,targetAngle);
-        System.out.print(moduleName + " setTurnLocation = "+targetAngle+"\n");
+        // System.out.print(moduleName + " setTurnLocation = "+targetAngle+"\n");
     }
     
     public double getError() {
