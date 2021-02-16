@@ -92,6 +92,7 @@ public class Constants {
         public final static int DRIVE_DPAD_DNLEFT = LOGITECH_DPAD_DNLEFT;
         public final static int DRIVE_DPAD_DN = LOGITECH_DPAD_DN;
         public final static int DRIVE_DPAD_DNRIGHT = LOGITECH_DPAD_DNRIGHT;
+        public final static int DRIVE_DPAD_GYRO_RESET = LOGITECH_DPAD_LEFT;
         //Drive controller DPAD used as range selector for shooter speed (top half and bottom half)
         
         public final static int OPER_AXIS_CLIMB = LOGITECH_AXIS_LV; //Axis that controls the climber up and down

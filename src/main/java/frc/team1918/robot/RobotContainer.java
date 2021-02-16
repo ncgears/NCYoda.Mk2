@@ -12,7 +12,7 @@ package frc.team1918.robot;
 //Global imports
 //import frc.team1918.robot.Constants;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.button.Button;
+// import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
@@ -72,6 +72,7 @@ public class RobotContainer {
   private JoystickButton btn_MIXER_FEEDSTUCK = new JoystickButton(dj, Constants.OI.DRIVE_BTN_MIXER_FEEDSTUCK);
   private JoystickButton btn_CALIBRATE_START = new JoystickButton(dj, Constants.OI.DRIVE_BTN_CALIBRATE_START);
   private JoystickButton btn_CALIBRATE_STOP = new JoystickButton(dj, Constants.OI.DRIVE_BTN_CALIBRATE_STOP);
+  private POVButton btn_GYRO_RESET = new POVButton(dj, Constants.OI.DRIVE_DPAD_GYRO_RESET);
   //Operator Controller
   private Joystick oj = new Joystick(Constants.OI.OI_JOY_OPER);
   private JoystickButton btn_SHOOT_WALL = new JoystickButton(oj, Constants.OI.OPER_BTN_SHOOT_WALL);
@@ -112,6 +113,7 @@ public class RobotContainer {
     btn_HOMESWERVE.whenPressed(new cg_drive_autoHome(m_drive));
     btn_CALIBRATE_START.whenPressed(new drive_startCalibration(m_drive));
     btn_CALIBRATE_STOP.whenPressed(new drive_stopCalibration(m_drive));
+    btn_GYRO_RESET.whenPressed(new drive_resetGyro(m_drive));
     //
     btn_SHOOT_WALL.whenPressed(new shooter_shootWall(m_shooter));
     // btn_ALLUP.whenPressed(new moveArmUp(m_collector));
