@@ -25,19 +25,19 @@ public class Constants {
 
         public final static int DT_FL_DRIVE_MC_ID = 2; //Front Left Drive Motor Controller ID //SPARKMAX
         public final static int DT_FL_TURN_MC_ID = 7; //Front Left Turn Motor Controller ID //TALONSRX
-        public final static int DT_FL_HOME = 0; //Front Left encoder value at home position
+        // public final static int DT_FL_HOME = 0; //Front Left encoder value at home position
         
         public final static int DT_FR_DRIVE_MC_ID = 16; //Front Right Drive Motor Controller ID //SPARKMAX
         public final static int DT_FR_TURN_MC_ID = 4; //Front Right Turn Motor Controller ID //TALONSRX
-        public final static int DT_FR_HOME = 0; //Front Right encoder value at home position
+        // public final static int DT_FR_HOME = 0; //Front Right encoder value at home position
 
         public final static int DT_RL_DRIVE_MC_ID = 3; //Rear Left Drive Motor Controller ID //SPARKMAX
         public final static int DT_RL_TURN_MC_ID = 8; //Rear Left Turn Motor Controller ID //TALONSRX
-        public final static int DT_RL_HOME = 0; //Rear Left encoder value at home position
+        // public final static int DT_RL_HOME = 0; //Rear Left encoder value at home position
         
         public final static int DT_RR_DRIVE_MC_ID = 1; //Rear Right Drive Motor Controller ID //SPARKMAX
         public final static int DT_RR_TURN_MC_ID = 11; //Rear Right Turn Motor Controller ID //TALONSRX
-        public final static int DT_RR_HOME = 0; //Rear Right encoder value at home position
+        // public final static int DT_RR_HOME = 0; //Rear Right encoder value at home position
     }
     
     public static final class OI {
@@ -47,7 +47,7 @@ public class Constants {
         public final static int OI_JOY_DRIVE = 0; //ID of Driver Joystick
         public final static int OI_JOY_OPER = 1; //ID of Operator Joystick
         public final static double OI_JOY_DEADBAND = 0.1; //Deadband for analog joystick axis
-        public static enum driveDpadDirection {UP,DOWN,LEFT,RIGHT,IDLE};
+        // public static enum driveDpadDirection {UP,DOWN,IDLE};
         
         //Logitech Controller buttons  //In Java, buttons are 1-based array, BUT NOT AXIS
         private final static int LOGITECH_BTN_A = 1; //A Button
@@ -76,9 +76,11 @@ public class Constants {
         private final static int LOGITECH_DPAD_UPLEFT = 315;
         private final static int LOGITECH_DPAD_IDLE = -1; 
     
+    //Temporary
         public final static int DRIVE_BTN_CALIBRATE_START = LOGITECH_BTN_B; //temporary for testing
         public final static int DRIVE_BTN_CALIBRATE_STOP = LOGITECH_BTN_A; //temporary for testing
 
+    //Driver Controller
         public final static int DRIVE_AXIS_STRAFE = LOGITECH_AXIS_LH; //Axis that moves the robot side to side on the field
         public final static int DRIVE_AXIS_FWD = LOGITECH_AXIS_LV; //Axis that moves the robot up and down the field
         public final static int DRIVE_AXIS_TURN = LOGITECH_AXIS_RH; //Axis that controls the rotation of the robot
@@ -88,16 +90,15 @@ public class Constants {
         public final static int DRIVE_BTN_MIXER_FEEDSTUCK = LOGITECH_BTN_LB; //Reverse the mixer direction to unstick power cells
         public final static int DRIVE_BTN_HOMESWERVE = LOGITECH_BTN_Y; //Home the swerve modules
         public final static int DRIVE_BTN_ABSZERO_KEY1 = LOGITECH_BTN_BACK; //DRIVER KEY1 and OPER KEY2 are required for this
-        public final static int DRIVE_DPAD_UPLEFT = LOGITECH_DPAD_UPLEFT;
-        public final static int DRIVE_DPAD_UP = LOGITECH_DPAD_UP;
-        public final static int DRIVE_DPAD_UPRIGHT = LOGITECH_DPAD_UPRIGHT;
-        public final static int DRIVE_DPAD_DNLEFT = LOGITECH_DPAD_DNLEFT;
-        public final static int DRIVE_DPAD_DN = LOGITECH_DPAD_DN;
-        public final static int DRIVE_DPAD_DNRIGHT = LOGITECH_DPAD_DNRIGHT;
-        public final static int DRIVE_DPAD_LEFT = LOGITECH_DPAD_LEFT;
-        public final static int DRIVE_DPAD_RIGHT = LOGITECH_DPAD_RIGHT;
+        public final static int DRIVE_DPAD_GYRO_RESET = LOGITECH_DPAD_LEFT;
         //Drive controller DPAD used as range selector for shooter speed (top half and bottom half)
-        
+        public final static int DRIVE_DPAD_THROTUP_UL = LOGITECH_DPAD_UPLEFT;
+        public final static int DRIVE_DPAD_THROTUP_UP = LOGITECH_DPAD_UP;
+        public final static int DRIVE_DPAD_THROTUP_UR = LOGITECH_DPAD_UPRIGHT;
+        public final static int DRIVE_DPAD_THROTDN_DL = LOGITECH_DPAD_DNLEFT;
+        public final static int DRIVE_DPAD_THROTDN_DN = LOGITECH_DPAD_DN;
+        public final static int DRIVE_DPAD_THROTDN_DR = LOGITECH_DPAD_DNRIGHT;
+    //Operator Controller        
         public final static int OPER_AXIS_CLIMB = LOGITECH_AXIS_LV; //Axis that controls the climber up and down
         public final static int OPER_AXIS_COLLECTOR_OUT = LOGITECH_AXIS_RT; //Axis that runs the collector out (actually a trigger button)
         public final static int OPER_BTN_SHOOT_WALL = LOGITECH_BTN_A; //Shoot from at the wall

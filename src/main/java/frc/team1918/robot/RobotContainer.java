@@ -12,7 +12,7 @@ package frc.team1918.robot;
 //Global imports
 //import frc.team1918.robot.Constants;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.button.Button;
+// import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
@@ -28,6 +28,7 @@ import frc.team1918.robot.subsystems.MixerSubsystem;
 import frc.team1918.robot.commands.drive_defaultDrive;
 import frc.team1918.robot.commands.drive_startCalibration;
 import frc.team1918.robot.commands.drive_stopCalibration;
+import frc.team1918.robot.commands.drive_resetGyro;
 //samples
 import frc.team1918.robot.commands.ExampleCommand;
 import frc.team1918.robot.commands.shooter_shootWall;
@@ -73,7 +74,14 @@ public class RobotContainer {
   private JoystickButton btn_MIXER_FEEDSTUCK = new JoystickButton(dj, Constants.OI.DRIVE_BTN_MIXER_FEEDSTUCK);
   private JoystickButton btn_CALIBRATE_START = new JoystickButton(dj, Constants.OI.DRIVE_BTN_CALIBRATE_START);
   private JoystickButton btn_CALIBRATE_STOP = new JoystickButton(dj, Constants.OI.DRIVE_BTN_CALIBRATE_STOP);
-  private JoystickButton btn_GYRO_RESET = new JoystickButton(dj, Constants.OI.DRIVE_DPAD_LEFT);
+  private POVButton btn_GYRO_RESET = new POVButton(dj, Constants.OI.DRIVE_DPAD_GYRO_RESET);
+  private POVButton btn_THROTUP_UP = new POVButton(dj, Constants.OI.DRIVE_DPAD_THROTUP_UP);
+    private POVButton btn_THROTUP_UL = new POVButton(dj, Constants.OI.DRIVE_DPAD_THROTUP_UL);
+    private POVButton btn_THROTUP_UR = new POVButton(dj, Constants.OI.DRIVE_DPAD_THROTUP_UR);
+  private POVButton btn_THROTDN_DN = new POVButton(dj, Constants.OI.DRIVE_DPAD_THROTDN_DN);
+    private POVButton btn_THROTDN_DL = new POVButton(dj, Constants.OI.DRIVE_DPAD_THROTDN_DL);
+    private POVButton btn_THROTDN_DR = new POVButton(dj, Constants.OI.DRIVE_DPAD_THROTDN_DR);
+  
   //Operator Controller
   private Joystick oj = new Joystick(Constants.OI.OI_JOY_OPER);
   private JoystickButton btn_SHOOT_WALL = new JoystickButton(oj, Constants.OI.OPER_BTN_SHOOT_WALL);
@@ -109,16 +117,25 @@ public class RobotContainer {
    * instantiating a {@link GenericHID} or one of its subclasses ({@link
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
+   * For more info, see {@link https://docs.wpilib.org/en/stable/docs/software/commandbased/binding-commands-to-triggers.html}
    */
   private void configureButtonBindings() {
     
     btn_HOMESWERVE.whenPressed(new cg_drive_autoHome(m_drive));
     btn_CALIBRATE_START.whenPressed(new drive_startCalibration(m_drive));
     btn_CALIBRATE_STOP.whenPressed(new drive_stopCalibration(m_drive));
+    btn_GYRO_RESET.whenPressed(new drive_resetGyro(m_drive));
     //
     btn_SHOOT_WALL.whenPressed(new shooter_shootWall(m_shooter));
     // btn_ALLUP.whenPressed(new moveArmUp(m_collector));
     // btn_ANTIGRAV.whenPressed(new engageAntiBackdrive(m_climber)).whenReleased(new disengageAntiBackdrive(m_climber));
+
+    //bind all 3 up and all 3 down for shooter throttle up/down
+    // btn_THROTUP_UP.or(btn_THROTUP_UL).or(btn_THROTUP_UR).whenPressed(new do_something);
+    // btn_THROTDN_DN.or(btn_THROTDN_DL).or(btn_THROTDN_DR).whenPressed(new do_something_else);
+
+    //bind both buttons requirement
+    // btn_ABSZERO_KEY1.and(btn_ABSZERO_KEY2).whenPressed(new command);
 
 
   }
