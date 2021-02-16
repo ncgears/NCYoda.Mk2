@@ -56,10 +56,12 @@ public class DriveSubsystem extends SubsystemBase {
 	}
 
 	public static void setDrivePower(double flPower, double frPower, double rlPower, double rrPower) {
-	    // dtFL.setDrivePower(flPower);
-		// dtFR.setDrivePower(frPower);
-		// dtRL.setDrivePower(rlPower);
-		// dtRR.setDrivePower(rrPower);
+		if (!Constants.DriveTrain.DT_DRIVE_DISABLED) {
+			dtFL.setDrivePower(flPower);
+			dtFR.setDrivePower(frPower);
+			dtRL.setDrivePower(rlPower);
+			dtRR.setDrivePower(rrPower);
+		}
 	}
 
 	public static void setTurnPower(double flPower, double frPower, double rlPower, double rrPower) {

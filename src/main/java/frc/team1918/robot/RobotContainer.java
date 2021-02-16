@@ -53,6 +53,7 @@ public class RobotContainer {
   //other subsystems
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   //team 1918 commands
+  private final cg_drive_autoHome m_autoHome = new cg_drive_autoHome(m_drive);
   // private final shooter_shootWall m_shooter_shootWall = new shooter_shootWall(shooter);
   // private final shooter_shootShort m_shooter_shootShort = new shooter_shootShort(shooter);
   // private final shooter_shootLine m_shooter_shootLine = new shooter_shootLine(shooter);
@@ -93,7 +94,7 @@ public class RobotContainer {
     m_drive.setDefaultCommand(
       new drive_defaultDrive(
           m_drive,
-          () -> Helpers.OI.getAxisFwdValue(false),
+          () -> Helpers.OI.getAxisFwdValue(true),
           () -> Helpers.OI.getAxisStrafeValue(true),
           () -> Helpers.OI.getAxisTurnValue(true)
       )
@@ -120,6 +121,9 @@ public class RobotContainer {
 
   }
 
+  public cg_drive_autoHome getAutoHomeCommand() {
+    return m_autoHome;
+  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
