@@ -115,6 +115,7 @@ public class RobotContainer {
    * instantiating a {@link GenericHID} or one of its subclasses ({@link
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
+   * For more info, see {@link https://docs.wpilib.org/en/stable/docs/software/commandbased/binding-commands-to-triggers.html}
    */
   private void configureButtonBindings() {
     btn_HOMESWERVE.whenPressed(new cg_drive_autoHome(m_drive));
@@ -125,7 +126,7 @@ public class RobotContainer {
     btn_SHOOT_WALL.whenPressed(new shooter_shootWall(m_shooter));
     // btn_ALLUP.whenPressed(new moveArmUp(m_collector));
     // btn_ANTIGRAV.whenPressed(new engageAntiBackdrive(m_climber)).whenReleased(new disengageAntiBackdrive(m_climber));
-    
+
     //bind all 3 up and all 3 down for shooter throttle up/down
     // btn_THROTUP_UP.or(btn_THROTUP_UL).or(btn_THROTUP_UR).whenPressed(new do_something);
     // btn_THROTDN_DN.or(btn_THROTDN_DL).or(btn_THROTDN_DR).whenPressed(new do_something_else);
