@@ -3,6 +3,7 @@ package frc.team1918.robot;
 
 import frc.team1918.robot.Constants;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj2.command.button.Button;
 
 public class Helpers {
     public static final class OI {
@@ -102,6 +103,114 @@ public class Helpers {
          */
         public static final double applyDeadband(double inVal) {
             return ( Math.abs(inVal) < Constants.OI.OI_JOY_DEADBAND ) ? 0.0 : inVal;
+        }
+        public static enum DPAD {
+            UP(0), UP_RIGHT(45), RIGHT(90), DOWN_RIGHT(135), DOWN(180), DOWN_LEFT(225), LEFT(270), UP_LEFT(315);
+            private int value;
+            /**
+             * Constructor
+             * @param value
+             */
+            private DPAD(int value) {
+                this.value = value;
+            }
+
+            /**
+             * Convert integers to DPAD values
+             * @param angle
+             * @return DPAD with matching angle
+             */
+            public static DPAD getEnum(int angle) {
+                angle = Math.abs(angle);
+                angle %= 360;
+                angle = Math.round(angle / 45) * 45; //May have rounding errors, due to rounding errors...
+                for (DPAD dpad : values()) {
+                    if (dpad.value == angle) return dpad;
+                }
+                return null;
+            }
+        }
+        public static class DirectionalPad extends Button {
+            private final Joystick parent;
+            public final Button UP;
+            public final Button UPRIGHT;
+            public final Button RIGHT;
+            public final Button DOWNRIGHT;
+            public final Button DOWN;
+            public final Button DOWNLEFT;
+            public final Button LEFT;
+            public final Button UPLEFT;
+
+            /**
+             * Constructor
+             * @param parent - This is the joystick object that owns this dpad
+             */
+            DirectionalPad(final Joystick parent) {
+                this.parent = parent;
+                this.UP = new DPadButton(this, DPAD.UP);
+                this.UPRIGHT = new DPadButton(this, DPAD.UP_RIGHT);
+                this.RIGHT = new DPadButton(this, DPAD.RIGHT);
+                this.DOWNRIGHT = new DPadButton(this, DPAD.DOWN_RIGHT);
+                this.DOWN = new DPadButton(this, DPAD.DOWN);
+                this.DOWNLEFT = new DPadButton(this, DPAD.DOWN_LEFT);
+                this.LEFT = new DPadButton(this, DPAD.LEFT);
+                this.UPLEFT = new DPadButton(this, DPAD.UP_LEFT);
+            }
+
+            /**
+             * This sub-class is used to represent each of the 8 values as a button
+             */
+            public static class DPadButton extends Button {
+                private final DPAD direction;
+                private final DirectionalPad parent;
+
+                /**
+                 * Constructor
+                 * @param parent - This is the DirectionalPad that owns this button
+                 * @param DPAD
+                 */
+                DPadButton(final DirectionalPad parent, final DPAD dPadDirection) {
+                    this.direction = dPadDirection;
+                    this.parent = parent;
+                }
+
+                @Override
+                public boolean get() {
+                    return parent.getAngle() == direction.value;
+                }            
+            }
+
+            private int angle() {
+                return parent.getPOV();
+            }
+
+            @Override
+            public boolean get() {
+                return angle() != -1;
+            }
+
+            /**
+             * UP           0;
+             * UP_RIGHT     45;
+             * RIGHT        90;
+             * DOWN_RIGHT   135;
+             * DOWN         180;
+             * DOWN_LEFT    225;
+             * LEFT         270;
+             * UP_LEFT      315;
+             * @return A number between 0 and 315 indicating dpad direction
+             */
+            public int getAngle() {
+                return angle();
+            }
+
+            /**
+             * Just like getAngle, but returns a direction instead of an angle
+             * @return A DPAD direction
+             */
+            public DPAD getDirection() {
+                return DPAD.getEnum(angle());
+            }
         }
     }
 }
