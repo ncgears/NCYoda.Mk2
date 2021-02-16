@@ -73,6 +73,13 @@ public class RobotContainer {
   private JoystickButton btn_CALIBRATE_START = new JoystickButton(dj, Constants.OI.DRIVE_BTN_CALIBRATE_START);
   private JoystickButton btn_CALIBRATE_STOP = new JoystickButton(dj, Constants.OI.DRIVE_BTN_CALIBRATE_STOP);
   private POVButton btn_GYRO_RESET = new POVButton(dj, Constants.OI.DRIVE_DPAD_GYRO_RESET);
+  private POVButton btn_THROTUP_UP = new POVButton(dj, Constants.OI.DRIVE_DPAD_THROTUP_UP);
+    private POVButton btn_THROTUP_UL = new POVButton(dj, Constants.OI.DRIVE_DPAD_THROTUP_UL);
+    private POVButton btn_THROTUP_UR = new POVButton(dj, Constants.OI.DRIVE_DPAD_THROTUP_UR);
+  private POVButton btn_THROTDN_DN = new POVButton(dj, Constants.OI.DRIVE_DPAD_THROTDN_DN);
+    private POVButton btn_THROTDN_DL = new POVButton(dj, Constants.OI.DRIVE_DPAD_THROTDN_DL);
+    private POVButton btn_THROTDN_DR = new POVButton(dj, Constants.OI.DRIVE_DPAD_THROTDN_DR);
+  
   //Operator Controller
   private Joystick oj = new Joystick(Constants.OI.OI_JOY_OPER);
   private JoystickButton btn_SHOOT_WALL = new JoystickButton(oj, Constants.OI.OPER_BTN_SHOOT_WALL);
@@ -118,6 +125,13 @@ public class RobotContainer {
     btn_SHOOT_WALL.whenPressed(new shooter_shootWall(m_shooter));
     // btn_ALLUP.whenPressed(new moveArmUp(m_collector));
     // btn_ANTIGRAV.whenPressed(new engageAntiBackdrive(m_climber)).whenReleased(new disengageAntiBackdrive(m_climber));
+    
+    //bind all 3 up and all 3 down for shooter throttle up/down
+    // btn_THROTUP_UP.or(btn_THROTUP_UL).or(btn_THROTUP_UR).whenPressed(new do_something);
+    // btn_THROTDN_DN.or(btn_THROTDN_DL).or(btn_THROTDN_DR).whenPressed(new do_something_else);
+
+    //bind both buttons requirement
+    // btn_ABSZERO_KEY1.and(btn_ABSZERO_KEY2).whenPressed(new command);
 
 
   }
