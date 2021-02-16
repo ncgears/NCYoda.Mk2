@@ -76,6 +76,8 @@ public class Helpers {
                 case Constants.OI.DRIVE_DPAD_DNLEFT:
                 case Constants.OI.DRIVE_DPAD_DN:
                 case Constants.OI.DRIVE_DPAD_DNRIGHT: return Constants.OI.driveDpadDirection.DOWN;
+                case Constants.OI.DRIVE_DPAD_LEFT: return Constants.OI.driveDpadDirection.LEFT;
+                case Constants.OI.DRIVE_DPAD_RIGHT: return Constants.OI.driveDpadDirection.RIGHT;
             }
             return Constants.OI.driveDpadDirection.IDLE;
         }

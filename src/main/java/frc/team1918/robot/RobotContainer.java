@@ -63,7 +63,7 @@ public class RobotContainer {
 
   //Here, we are defining the buttons and binding
   //Driver Controller
-  public static enum driveDpadDirection {UP,DOWN,IDLE};
+  public static enum driveDpadDirection {UP,DOWN,LEFT,IDLE};
   private Joystick dj = new Joystick(Constants.OI.OI_JOY_DRIVE);
   private JoystickButton btn_ALLUP = new JoystickButton(dj, Constants.OI.DRIVE_BTN_ALLUP);
   private JoystickButton btn_ANTIGRAV = new JoystickButton(dj, Constants.OI.DRIVE_BTN_ANTIGRAV);
@@ -73,6 +73,7 @@ public class RobotContainer {
   private JoystickButton btn_MIXER_FEEDSTUCK = new JoystickButton(dj, Constants.OI.DRIVE_BTN_MIXER_FEEDSTUCK);
   private JoystickButton btn_CALIBRATE_START = new JoystickButton(dj, Constants.OI.DRIVE_BTN_CALIBRATE_START);
   private JoystickButton btn_CALIBRATE_STOP = new JoystickButton(dj, Constants.OI.DRIVE_BTN_CALIBRATE_STOP);
+  private JoystickButton btn_GYRO_RESET = new JoystickButton(dj, Constants.OI.DRIVE_DPAD_LEFT);
   //Operator Controller
   private Joystick oj = new Joystick(Constants.OI.OI_JOY_OPER);
   private JoystickButton btn_SHOOT_WALL = new JoystickButton(oj, Constants.OI.OPER_BTN_SHOOT_WALL);
@@ -110,6 +111,7 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    
     btn_HOMESWERVE.whenPressed(new cg_drive_autoHome(m_drive));
     btn_CALIBRATE_START.whenPressed(new drive_startCalibration(m_drive));
     btn_CALIBRATE_STOP.whenPressed(new drive_stopCalibration(m_drive));

@@ -47,7 +47,7 @@ public class Constants {
         public final static int OI_JOY_DRIVE = 0; //ID of Driver Joystick
         public final static int OI_JOY_OPER = 1; //ID of Operator Joystick
         public final static double OI_JOY_DEADBAND = 0.1; //Deadband for analog joystick axis
-        public static enum driveDpadDirection {UP,DOWN,IDLE};
+        public static enum driveDpadDirection {UP,DOWN,LEFT,RIGHT,IDLE};
         
         //Logitech Controller buttons  //In Java, buttons are 1-based array, BUT NOT AXIS
         private final static int LOGITECH_BTN_A = 1; //A Button
@@ -94,6 +94,8 @@ public class Constants {
         public final static int DRIVE_DPAD_DNLEFT = LOGITECH_DPAD_DNLEFT;
         public final static int DRIVE_DPAD_DN = LOGITECH_DPAD_DN;
         public final static int DRIVE_DPAD_DNRIGHT = LOGITECH_DPAD_DNRIGHT;
+        public final static int DRIVE_DPAD_LEFT = LOGITECH_DPAD_LEFT;
+        public final static int DRIVE_DPAD_RIGHT = LOGITECH_DPAD_RIGHT;
         //Drive controller DPAD used as range selector for shooter speed (top half and bottom half)
         
         public final static int OPER_AXIS_CLIMB = LOGITECH_AXIS_LV; //Axis that controls the climber up and down

@@ -121,6 +121,10 @@ public class DriveSubsystem extends SubsystemBase {
 		dtRR.stopDrive();
 	}
 
+	public void resetGyro() {
+		gyro.reset();
+	}
+
 	public static double getgyroAngle() {
 		return gyro.getAngle();
 	}
