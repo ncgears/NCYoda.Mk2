@@ -107,7 +107,7 @@ public class DriveSubsystem extends SubsystemBase {
 	}
 
 	public void resetAllEnc() {
-		System.out.print("resetAllEnc\n");
+		System.out.println("resetAllEnc");
 	    dtFL.resetTurnEnc();
 		dtFR.resetTurnEnc();
 		dtRL.resetTurnEnc();
@@ -122,6 +122,7 @@ public class DriveSubsystem extends SubsystemBase {
 	}
 
 	public void resetGyro() {
+		System.out.println("resetGyro");
 		gyro.reset();
 	}
 
@@ -265,7 +266,7 @@ public class DriveSubsystem extends SubsystemBase {
 		outString += " frHome:"+frHome;
 		outString += " rlHome:"+rlHome;
 		outString += " rrHome:"+rrHome;
-		System.out.print("getAllAbsPos: " + outString+"\n");
+		System.out.println("getAllAbsPos: " + outString);
 	}
 
 	public void saveAllHomes() {
@@ -337,7 +338,7 @@ public class DriveSubsystem extends SubsystemBase {
 	}
 
 	public void moveAllToHomes() {
-		System.out.print("moveAllToHomes\n");
+		System.out.println("moveAllToHomes");
 		readAllHomes();
 		dtFL.setTurnLocationInEncoderTicks(flHome);
 		dtFR.setTurnLocationInEncoderTicks(frHome);
@@ -346,7 +347,7 @@ public class DriveSubsystem extends SubsystemBase {
 	}
 
 	public void startCalibrationMode() {
-		System.out.print("startCalibrationMode\n");
+		System.out.println("startCalibrationMode");
 		lockDriveControls(true);
 		setAllTurnBrakeMode(false);
 
@@ -357,7 +358,7 @@ public class DriveSubsystem extends SubsystemBase {
 	}
 
 	public void stopCalibrationMode() {
-		System.out.print("stopCalibrationMode\n");
+		System.out.println("stopCalibrationMode");
 		getAllAbsPos();
 		saveAllHomes();
 		// readAllHomes();
@@ -371,7 +372,7 @@ public class DriveSubsystem extends SubsystemBase {
 
 	public void lockDriveControls(boolean lock) {
 		driveControlsLocked = lock;
-		System.out.print("drive controls lock state: " + lock + "\n");
+		System.out.println("drive controls lock state: " + lock);
 	}
 
 	public void setAllTurnEncoderAbsolute(boolean useAbsolute) {

@@ -116,10 +116,10 @@ public class SwerveModule {
         currentPos -= (currentPos + offset > 4095) ? 4096 : 0;
 
         if (currentPos + offset <= highHome && currentPos + offset >= lowHome) {
-            System.out.print(moduleName + " isTurnAtHome=true; current="+currentPos+"; target="+homePos+";\n");
+            System.out.println(moduleName + " isTurnAtHome=true; current="+currentPos+"; target="+homePos+";");
             return true;
         } else {
-            System.out.print(moduleName + " isTurnAtHome=false; current="+currentPos+"; target="+homePos+";\n");
+            System.out.println(moduleName + " isTurnAtHome=false; current="+currentPos+"; target="+homePos+";");
             return false;
         }
     }
@@ -128,7 +128,7 @@ public class SwerveModule {
      * Reset encoder to 0
      */
     public void resetTurnEnc() {
-        System.out.print(moduleName + " resetTurnEnc\n");
+        System.out.println(moduleName + " resetTurnEnc");
 		turn.getSensorCollection().setQuadraturePosition(0,10);
     }
 
