@@ -40,13 +40,29 @@ public class DriveSubsystem extends SubsystemBase {
 
 	public DriveSubsystem() {
 	    dtFL = new SwerveModule(Constants.DriveTrain.DT_FL_DRIVE_MC_ID,
-				Constants.DriveTrain.DT_FL_TURN_MC_ID, 3.0, 0, 50, 0, "dtFL"); // Front Left //izone was 200  // 3,0,50,0
+				Constants.DriveTrain.DT_FL_TURN_MC_ID, 
+				Constants.DriveTrain.DT_TURN_FL_P, 
+				Constants.DriveTrain.DT_TURN_FL_I, 
+				Constants.DriveTrain.DT_TURN_FL_D, 
+				Constants.DriveTrain.DT_TURN_FL_IZONE, "dtFL"); // Front Left //izone was 200  // 3,0,50,0
 		dtFR = new SwerveModule(Constants.DriveTrain.DT_FR_DRIVE_MC_ID,
-				Constants.DriveTrain.DT_FR_TURN_MC_ID, 3.0, 0, 50, 0, "dtFR"); // Front Right
+				Constants.DriveTrain.DT_FR_TURN_MC_ID, 
+				Constants.DriveTrain.DT_TURN_P, 
+				Constants.DriveTrain.DT_TURN_I, 
+				Constants.DriveTrain.DT_TURN_D, 
+				Constants.DriveTrain.DT_TURN_IZONE, "dtFR"); // Front Right
 		dtRL = new SwerveModule(Constants.DriveTrain.DT_RL_DRIVE_MC_ID,
-				Constants.DriveTrain.DT_RL_TURN_MC_ID, 3.0, 0, 50, 0, "dtRL"); // Rear Left
+				Constants.DriveTrain.DT_RL_TURN_MC_ID, 
+				Constants.DriveTrain.DT_TURN_P, 
+				Constants.DriveTrain.DT_TURN_I, 
+				Constants.DriveTrain.DT_TURN_D, 
+				Constants.DriveTrain.DT_TURN_IZONE, "dtRL"); // Rear Left
 		dtRR = new SwerveModule(Constants.DriveTrain.DT_RR_DRIVE_MC_ID,
-                Constants.DriveTrain.DT_RR_TURN_MC_ID, 3.0, 0, 50, 0, "dtRR"); // Rear Right
+				Constants.DriveTrain.DT_RR_TURN_MC_ID, 
+				Constants.DriveTrain.DT_TURN_P,
+				Constants.DriveTrain.DT_TURN_I, 
+				Constants.DriveTrain.DT_TURN_D, 
+				Constants.DriveTrain.DT_TURN_IZONE, "dtRR"); // Rear Right
 
 		gyro = new AHRS(SPI.Port.kMXP);
 	}

@@ -1,9 +1,0 @@
-[
-  {
-    "artifact": "frcJava (in project NCYoda.Mk2)",
-    "target": "roborio",
-    "debugfile": "frcJava_roborio.debugconfig",
-    "project": "NCYoda.Mk2",
-    "language": "java"
-  }
-]
