@@ -141,7 +141,7 @@ public class RobotContainer {
 
   }
 
-  public Command getResetGyroCommand() {
+  public drive_resetGyro getResetGyroCommand() {
     return m_resetGyro;
   }
   public cg_drive_autoHome getAutoHomeCommand() {

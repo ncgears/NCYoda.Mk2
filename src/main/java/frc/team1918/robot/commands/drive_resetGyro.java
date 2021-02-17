@@ -21,7 +21,6 @@ import frc.team1918.robot.subsystems.DriveSubsystem;
 public class drive_resetGyro extends CommandBase {
   private final DriveSubsystem m_drive;
 
-
   /**
    * Creates a new command.
    *
@@ -33,7 +32,7 @@ public class drive_resetGyro extends CommandBase {
   }
 
   @Override
-  public void execute() {
+  public void end(boolean interrupted) {
     m_drive.resetGyro();
   }
 

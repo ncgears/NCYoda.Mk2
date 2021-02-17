@@ -70,6 +70,7 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     m_resetGyro = m_robotContainer.getResetGyroCommand();
     if (m_resetGyro != null) m_resetGyro.schedule();
+
     m_autoHome = m_robotContainer.getAutoHomeCommand(); 
     if (m_autoHome != null) m_autoHome.schedule();
 
@@ -91,13 +92,13 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.cancel();
-    }
+    if (m_autonomousCommand != null) m_autonomousCommand.cancel();
+
+    m_resetGyro = m_robotContainer.getResetGyroCommand();
+    if (m_resetGyro != null) m_resetGyro.schedule();
+
     m_autoHome = m_robotContainer.getAutoHomeCommand(); 
-    if (m_autoHome != null) {
-      m_autoHome.schedule();
-    }
+    if (m_autoHome != null) m_autoHome.schedule();
   }
 
   /**
