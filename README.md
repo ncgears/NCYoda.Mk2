@@ -7,3 +7,4 @@ We encourage you to learn from our code, which we will be continually updating a
 If you would like to know something specific about our code, reach out to us.  Our lead programming mentor can be reached here: jim at ncgears.com
 
 Thanks!
+NC Gears FRC Team 1918
