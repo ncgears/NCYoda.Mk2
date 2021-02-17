@@ -31,7 +31,7 @@ import frc.team1918.robot.commands.drive_stopCalibration;
 import frc.team1918.robot.commands.drive_resetGyro;
 //samples
 import frc.team1918.robot.commands.ExampleCommand;
-import frc.team1918.robot.commands.shooter_shootWall;
+import frc.team1918.robot.commands.shooter.shooter_shootWall;
 //CommandGroup imports
 import frc.team1918.robot.commandgroups.cg_drive_autoHome;
 
