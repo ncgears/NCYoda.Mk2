@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.team1918.robot.commands;
+package frc.team1918.robot.commands.shooter;
 
 import frc.team1918.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
