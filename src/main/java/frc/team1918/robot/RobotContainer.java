@@ -54,6 +54,7 @@ public class RobotContainer {
   //other subsystems
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   //team 1918 commands
+  private final drive_resetGyro m_resetGyro = new drive_resetGyro(m_drive);
   private final cg_drive_autoHome m_autoHome = new cg_drive_autoHome(m_drive);
   // private final shooter_shootWall m_shooter_shootWall = new shooter_shootWall(shooter);
   // private final shooter_shootShort m_shooter_shootShort = new shooter_shootShort(shooter);
@@ -140,6 +141,9 @@ public class RobotContainer {
 
   }
 
+  public Command getResetGyroCommand() {
+    return m_resetGyro;
+  }
   public cg_drive_autoHome getAutoHomeCommand() {
     return m_autoHome;
   }

@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   private Command m_autoHome;
+  private Command m_resetGyro;
 
   private RobotContainer m_robotContainer;
 
@@ -67,17 +68,14 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
+    m_resetGyro = m_robotContainer.getResetGyroCommand();
+    if (m_resetGyro != null) m_resetGyro.schedule();
     m_autoHome = m_robotContainer.getAutoHomeCommand(); 
-    if (m_autoHome != null) {
-      m_autoHome.schedule();
-    }
+    if (m_autoHome != null) m_autoHome.schedule();
 
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
-
     // schedule the autonomous command (example)
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.schedule();
-    }
+    if (m_autonomousCommand != null) m_autonomousCommand.schedule();
   }
 
   /**
