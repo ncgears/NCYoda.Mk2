@@ -29,13 +29,13 @@ public class SwerveModule {
 //SparkMAX Java API Doc: https://www.revrobotics.com/content/sw/max/sw-docs/java/index.html
 
  	/**
-	 * Lets make a new Swerve Module
-	 * @param driveMC_ID First I gotta know what talon we are using for driving
-	 * @param turnMC_ID Next I gotta know what talon we are using to turn
-	 * @param tP I probably need to know the P constant for the turning PID
-	 * @param tI I probably need to know the I constant for the turning PID
-	 * @param tD I probably need to know the D constant for the turning PID
-	 * @param tIZone I might not need to know the I Zone value for the turning PID
+	 * 1918 Swerve Module - Uses Spark Max for drive (Neo) and Talon SRX for turn (bag with gearbox)
+	 * @param driveMC_ID This is the CAN ID of the drive motor controller
+	 * @param turnMC_ID This is the CAN ID of the turn motor controller
+	 * @param tP The P constant (double) for the turning PID
+	 * @param tI The I constant (double) for the turning PID
+	 * @param tD The D constant (double) for the turning PID
+	 * @param tIZone The IZone value (int) for the turning PID
 	 */
     public SwerveModule(int driveMC_ID, int turnMC_ID, double tP, double tI, double tD, int tIZone, String name){
         drive = new CANSparkMax(driveMC_ID, MotorType.kBrushless);
@@ -48,11 +48,6 @@ public class SwerveModule {
         turn.configSelectedFeedbackSensor(  FeedbackDevice.CTRE_MagEncoder_Relative, // Local Feedback Source
                                             Constants.Global.PID_PRIMARY,				// PID Slot for Source [0, 1]
                                             Constants.Global.kTimeoutMs);				// Configuration Timeout
-/*  //During calibration, we use absolute encoder position
-        turn.configSelectedFeedbackSensor(	FeedbackDevice.CTRE_MagEncoder_Absolute, // Local Feedback Source
-                                            Constants.PID_PRIMARY,				// PID Slot for Source [0, 1]
-                                            Constants.kTimeoutMs);				// Configuration Timeout
-*/
         isDrivePowerInverted = false;
         TURN_P = tP;
         TURN_I = tI;
@@ -103,6 +98,11 @@ public class SwerveModule {
         return (turn.getSensorCollection().getPulseWidthPosition() & 0xFFF);
     }
 
+    /**
+     * Returns a boolean indicating if the module is at home position within the margin of error defined in constants by DriveTrain.DT_HOME_MARGIN_OF_ERROR
+     * @param homePos Absolute encoder value of the target home position.
+     * @return Boolean value indicating if this swerve module is at the home position.
+     */
     public boolean isTurnAtHome(int homePos) {
         int currentPos = getTurnAbsPos();
         int marginErr = Constants.DriveTrain.DT_HOME_MARGIN_OF_ERROR;
@@ -125,19 +125,24 @@ public class SwerveModule {
     }
 
     /**
-     * Reset encoder to 0
+     * Resets the relative encoder to 0.
      */
     public void resetTurnEnc() {
         System.out.println(moduleName + " resetTurnEnc");
 		turn.getSensorCollection().setQuadraturePosition(0,10);
     }
 
-    public void setEncPos(int d) { //reset encoder position
-        turn.getSensorCollection().setQuadraturePosition(d,10);
+    /**
+     * Sets the relative encoder to a specific value
+     * @param value Integer from 0 to 4095 indicating the relative encoder position to set
+     */
+    public void setEncPos(int value) {
+        turn.getSensorCollection().setQuadraturePosition(value,10);
     }
 
     /**
-     * @return true if the encoder is connected and valid
+     * Checks if the turn encoder is connected and valid
+     * @return true if the encoder is connected, false otherwise
      */
     public boolean isTurnEncConnected() {
         /**The isSensorPresent() routine had only supported pulse width sensors as these allow for simple 
@@ -149,87 +154,93 @@ public class SwerveModule {
         //isSensorPresent(FeedbackDevice.CTRE_MagEncoder_Relative) == FeedbackDeviceStatus.FeedbackDeviceStatusPresent;
     }
 
+    /**
+     * Gets the number of rotations that the relative encoder has detected
+     * @return Integer indicating the number of rotations of the relative encoder
+     */
     public int getTurnRotations() {
         return (int) (turn.getSensorCollection().getQuadraturePosition() / FULL_ROTATION);
     }
 
+    /**
+     * Gets the relative encoder position within the current rotation
+     * @return Integer indicating the current location within the current rotation
+     */
     public double getTurnLocation() {
         return (turn.getSensorCollection().getQuadraturePosition() % FULL_ROTATION) / FULL_ROTATION;
     }
 
     /**
-	 * Set turn to pos from 0 to 1 using PID using shortest path to location
-	 * @param wa location to set to in radians
+	 * Set turn to pos from 0 to 1 using PID using shortest turn to get the wheels aimed the right way
+	 * @param wa wheel angle location to set to in radians
 	 */	
 	public void setTurnLocation(double wa) {
-        // SmartDashboard.putNumber("wa", wa);
         int currentAngle = getTurnRelPos();
-        // SmartDashboard.putNumber("currentAngle", currentAngle);
-        //wa += Math.PI;
-        this.isDrivePowerInverted = false;
+        this.isDrivePowerInverted = false; //Should we store this in a local variable and set it at the end to prevent changing this while in operation?
         int targetAngle = (int) (wa / Math.PI * (FULL_ROTATION * 0.5)); //full rotation * .5 to give us half encoder counts rotation to match with pi
-        // SmartDashboard.putNumber("targetAngle1", targetAngle);
         int currentNumRotations = (int) (currentAngle / FULL_ROTATION);
-        // SmartDashboard.putNumber("numRotation", currentNumRotations);
-        //example: current encoder count of 5500, shift target angle into proper rotation set (ie, 0-4096; 4097-8192)
         targetAngle += (currentNumRotations >= 0) ? currentNumRotations * FULL_ROTATION : (currentNumRotations + 1) * FULL_ROTATION;
-        // SmartDashboard.putNumber("targetAngle2", targetAngle);
         
-        if ((targetAngle > currentAngle + FULL_ROTATION * 0.25) || (targetAngle < currentAngle - FULL_ROTATION * 0.25)) {
+        if ((targetAngle > currentAngle + FULL_ROTATION * 0.25) || (targetAngle < currentAngle - FULL_ROTATION * 0.25)) { //if target is more than 25% of a rotation either way
             if (currentAngle < targetAngle) { //left strafe
-                // SmartDashboard.putString("target","left strafe");
-                if (targetAngle - currentAngle > FULL_ROTATION * 0.75) {
+                if (targetAngle - currentAngle > FULL_ROTATION * 0.75) { //if target would require moving less than 75% of a rotation, just go there
                     targetAngle -= FULL_ROTATION;
-                } else {
+                } else { //otherwise, turn half a rotation from the target and reverse the drive power
                     targetAngle -= FULL_ROTATION * 0.5;
                     this.isDrivePowerInverted = true;
                 }
-            } else { //right strafe ... currentAngle > targetAngle
-                // SmartDashboard.putString("target","right strafe");
-                if ( currentAngle - targetAngle > FULL_ROTATION * 0.75) { 
-                //if ( targetAngle - currentAngle < (FULL_ROTATION * 0.75 * -1)) {
-                    // SmartDashboard.putString("target2","if");
+            } else { //right strafe
+                if ( currentAngle - targetAngle > FULL_ROTATION * 0.75) { //if target would require moving less than 75% of a rotation, just go there
                     targetAngle += FULL_ROTATION;
-                } else {
-                    // SmartDashboard.putString("target2","else");  
+                } else { //otherwise, turn half a rotation from the target and reverse the drive power
                     targetAngle += FULL_ROTATION * 0.5;
                     this.isDrivePowerInverted = true;
                 }
             }
-            // SmartDashboard.putString("target","outside quarter rotation");
-        // } else {
-            // SmartDashboard.putString("target","within quarter rotation");
         }
-        // SmartDashboard.putBoolean("drivePowerInverted",this.isDrivePowerInverted);
-        // SmartDashboard.putNumber("targetAngleOut", targetAngle);
         turn.set(ControlMode.Position,targetAngle);
-        // System.out.print(moduleName + " setTurnLocation = "+targetAngle+"\n");
+        // System.out.println(moduleName + " setTurnLocation="+targetAngle+"; isDrivePowerInverted="+this.isDrivePowerInverted);
     }
     
+    /**
+     * Gets the closed-loop error. The units depend on which control mode is in use. If closed-loop is seeking a target sensor position, closed-loop error is the difference between target and current sensor value (in sensor units. Example 4096 units per rotation for CTRE Mag Encoder). If closed-loop is seeking a target sensor velocity, closed-loop error is the difference between target and current sensor value (in sensor units per 100ms). If using motion profiling or Motion Magic, closed loop error is calculated against the current target, and not the "final" target at the end of the profile/movement. See Phoenix-Documentation information on units.
+     * @return Double precision units of error
+     */
     public double getError() {
-        return turn.getClosedLoopError(); //SUS: To report talon PID loop errors back to robot
+        return turn.getClosedLoopError();
     }
 
+    /**
+     * Stops both turning and driving by setting their respective motor power to 0.
+     */
     public void stopBoth() {
         setDrivePower(0);
         setTurnPower(0);
     }
 
+    /**
+     * Stops the drive by setting the motor power to 0.
+     */
     public void stopDrive() {
         setDrivePower(0);
     }
 
-    public void setBrakeMode(String dev, boolean b) {
-        switch (dev) {
+    /**
+     * Sets the brake mode for the motor controller
+     * @param device String of either "turn" or "drive" indicating which device to set
+     * @param brake Boolean indicating if the brake mode should be set to brake (true) or coast (false)
+     */
+    public void setBrakeMode(String device, boolean brake) {
+        switch (device) {
             case "turn": //turn is a TalonSRX
-                if (b) {
+                if (brake) {
                     turn.setNeutralMode(NeutralMode.Brake);
                 } else {
                     turn.setNeutralMode(NeutralMode.Coast);
                 }
                 break;
             case "drive": //drive is a SparkMAX
-                if (b) {
+                if (brake) {
                     drive.setIdleMode(CANSparkMax.IdleMode.kBrake);
                 } else {
                     drive.setIdleMode(CANSparkMax.IdleMode.kCoast);
@@ -238,10 +249,18 @@ public class SwerveModule {
         }
     }
 
+    /**
+     * Sets the turn power to a specific PercentOutput
+     * @param p Double from -1 to 1 indicating the turn power, where 0.0 is stopped
+     */
     public void setTurnPowerPercent(double p) {
            turn.set(ControlMode.PercentOutput, p);
     }
 
+    /**
+     * Switches the turn encoder to either Absolute or Relative.
+     * @param useAbsolute Boolean indicating whether to enable the absolute encoder (true) or the relative encoder (false)
+     */
     public void setTurnEncoderAbsolute(boolean useAbsolute) {
         if (useAbsolute) {
             turn.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, Constants.Global.PID_PRIMARY, Constants.Global.kTimeoutMs);
@@ -255,6 +274,10 @@ public class SwerveModule {
         this.absEncoderEnabled = useAbsolute;
     }
 
+    /**
+     * Sets the turn position to a specific setpoint using the current encoder (absolute or relative)
+     * @param et Encoder Ticks to turn module to.  This depends on which encoder is active.
+     */
     public void setTurnLocationInEncoderTicks(double et) {
         // System.out.print(moduleName + " setTurnLocationInEncoderTicks = "+et+"\n");
         turn.set(ControlMode.Position, et);
