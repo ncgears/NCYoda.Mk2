@@ -1,8 +1,8 @@
 
 package frc.team1918.robot;
 
+@SuppressWarnings("unused")
 public class Constants {
-
     public static final class Global {
         //Global Constants
         public final static int kTimeoutMs = 30; //Timeout for reporting in DS if action fails, set to 0 to skip confirmation
