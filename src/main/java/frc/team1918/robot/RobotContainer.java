@@ -17,6 +17,8 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
+//Util imports
+import frc.team1918.robot.utils.DoubleButton;
 //Subsystems imports
 import frc.team1918.robot.subsystems.ExampleSubsystem;
 import frc.team1918.robot.subsystems.ClimberSubsystem;
@@ -66,11 +68,10 @@ public class RobotContainer {
 
   //Here, we are defining the buttons and binding
   //Driver Controller
-  public static enum driveDpadDirection {UP,DOWN,LEFT,IDLE};
   private Joystick dj = new Joystick(Constants.OI.OI_JOY_DRIVE);
   private JoystickButton btn_ALLUP = new JoystickButton(dj, Constants.OI.DRIVE_BTN_ALLUP);
   private JoystickButton btn_ANTIGRAV = new JoystickButton(dj, Constants.OI.DRIVE_BTN_ANTIGRAV);
-  private JoystickButton btn_ABSZERO_KEY1 = new JoystickButton(dj, Constants.OI.DRIVE_BTN_ABSZERO_KEY1);
+  private JoystickButton btn_MECHZERO_KEY1 = new JoystickButton(dj, Constants.OI.DRIVE_BTN_MECHZERO);
   private JoystickButton btn_HOMESWERVE = new JoystickButton(dj, Constants.OI.DRIVE_BTN_HOMESWERVE);
   private JoystickButton btn_MIXER_FEED = new JoystickButton(dj, Constants.OI.DRIVE_BTN_MIXER_FEED);
   private JoystickButton btn_MIXER_FEEDSTUCK = new JoystickButton(dj, Constants.OI.DRIVE_BTN_MIXER_FEEDSTUCK);
@@ -92,7 +93,10 @@ public class RobotContainer {
   private JoystickButton btn_SHOOT_TRENCH = new JoystickButton(oj, Constants.OI.OPER_BTN_SHOOT_TRENCH);
   private JoystickButton btn_TOG_MIDDOWN = new JoystickButton(oj, Constants.OI.OPER_BTN_TOG_MIDDOWN);
   private JoystickButton btn_COLLECTOR_IN = new JoystickButton(oj, Constants.OI.OPER_BTN_COLLECTOR_IN);
-  private JoystickButton btn_ABSZERO_KEY2 = new JoystickButton(oj, Constants.OI.OPER_BTN_ABSZERO_KEY2);
+  private JoystickButton btn_MECHZERO_KEY2 = new JoystickButton(oj, Constants.OI.OPER_BTN_MECHZERO);
+
+  //Special Bindings
+  private DoubleButton btn_MECHZERO = new DoubleButton(btn_MECHZERO_KEY1,btn_MECHZERO_KEY2);
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -136,6 +140,7 @@ public class RobotContainer {
     // btn_THROTDN_DN.or(btn_THROTDN_DL).or(btn_THROTDN_DR).whenPressed(new do_something_else);
 
     //bind both buttons requirement
+    btn_MECHZERO.whenPressed(new drive_moveAllToMechZero(m_drive));
     //btn_ABSZERO_KEY1.and(btn_ABSZERO_KEY2).whenPressed(new drive_moveAllToMechZero(m_drive));
 
 

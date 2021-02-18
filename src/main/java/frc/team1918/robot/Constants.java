@@ -93,7 +93,7 @@ public class Constants {
         public final static int DRIVE_BTN_MIXER_FEED = LOGITECH_BTN_X; //Run the mixer in the forward direction
         public final static int DRIVE_BTN_MIXER_FEEDSTUCK = LOGITECH_BTN_LB; //Reverse the mixer direction to unstick power cells
         public final static int DRIVE_BTN_HOMESWERVE = LOGITECH_BTN_Y; //Home the swerve modules
-        public final static int DRIVE_BTN_ABSZERO_KEY1 = LOGITECH_BTN_BACK; //DRIVER KEY1 and OPER KEY2 are required for this
+        public final static int DRIVE_BTN_MECHZERO = LOGITECH_BTN_BACK; //DRIVER MECHZERO and OPER MECHZERO are required for this
         public final static int DRIVE_DPAD_GYRO_RESET = LOGITECH_DPAD_LEFT;
         //Drive controller DPAD used as range selector for shooter speed (top half and bottom half)
         public final static int DRIVE_DPAD_THROTUP_UL = LOGITECH_DPAD_UPLEFT;
@@ -111,7 +111,7 @@ public class Constants {
         public final static int OPER_BTN_SHOOT_TRENCH = LOGITECH_BTN_Y; //Shoot from the trench
         public final static int OPER_BTN_TOG_MIDDOWN = LOGITECH_BTN_LB; //Toggle collector arm between middle and down position
         public final static int OPER_BTN_COLLECTOR_IN = LOGITECH_BTN_RB; //Run the collector in
-        public final static int OPER_BTN_ABSZERO_KEY2 = LOGITECH_BTN_BACK; //DRIVER KEY1 and OPER KEY2 are required for this
+        public final static int OPER_BTN_MECHZERO = LOGITECH_BTN_BACK; //DRIVER MECHZERO and OPER MECHZERO are required for this
         public final static int OPER_DPAD_COLLECTOR_UP = LOGITECH_DPAD_LEFT; //Move collector to up
         public final static int OPER_DPAD_COLLECTOR_MID = LOGITECH_DPAD_RIGHT; //Move collector to middle
         //We get dpad values with joystick.getPOV(0);
