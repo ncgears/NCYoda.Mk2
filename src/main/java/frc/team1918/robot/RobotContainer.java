@@ -146,7 +146,7 @@ public class RobotContainer {
 
     //bind both buttons requirement
     andbtn_MECHZERO.whenPressed(new drive_moveAllToMechZero(m_drive));
-    //btn_ABSZERO_KEY1.and(btn_ABSZERO_KEY2).whenPressed(new drive_moveAllToMechZero(m_drive));
+    //btn_ABSZERO_KEY1.and(btn_ABSZERO_KEY2).whenPressed(new drive_moveAllToMechZero(m_drive)); //Something something something triggers, couldnt make it work.
 
 
   }
