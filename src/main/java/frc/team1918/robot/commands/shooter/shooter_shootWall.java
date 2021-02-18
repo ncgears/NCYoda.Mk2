@@ -11,15 +11,13 @@ import frc.team1918.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /**
- * An example command that uses an example subsystem.
+ * A command that ...
  */
 public class shooter_shootWall extends CommandBase {
   @SuppressWarnings({"unused","PMD.UnusedPrivateField", "PMD.SingularField"}) //Dont add "unused" under normal operation
   private final ShooterSubsystem m_subsystem;
 
   /**
-   * Creates a new shooter_shootWall.
-   *
    * @param subsystem The subsystem used by this command.
    */
   public shooter_shootWall(ShooterSubsystem subsystem) {

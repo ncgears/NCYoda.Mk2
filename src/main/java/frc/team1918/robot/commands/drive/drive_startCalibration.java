@@ -8,23 +8,19 @@
 package frc.team1918.robot.commands.drive;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import java.util.function.DoubleSupplier;
-//import edu.wpi.first.wpilibj2.command.CommandBase;
-
+//import subsystem
 import frc.team1918.robot.subsystems.DriveSubsystem;
 
 /**
- * A command to drive the robot with joystick input (passed in as {@link DoubleSupplier}s). Written
- * explicitly for pedagogical purposes - actual code should inline a command this simple with {@link
- * edu.wpi.first.wpilibj2.command.RunCommand}.
+ * A command to start the calibration mode.
+ * This sets all the turn controllers to coast mode to allow manual adjustment of the swerve modules. 
+ * The positions are not saved until we stop calibration mode.
  */
 public class drive_startCalibration extends CommandBase {
   private final DriveSubsystem m_drive;
 
 
   /**
-   * Creates a new command.
-   *
    * @param subsystem The drive subsystem this command will run on.
    */
   public drive_startCalibration(DriveSubsystem subsystem) {
