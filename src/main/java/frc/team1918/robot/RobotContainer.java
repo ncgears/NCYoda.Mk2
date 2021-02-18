@@ -29,6 +29,7 @@ import frc.team1918.robot.commands.drive.drive_defaultDrive;
 import frc.team1918.robot.commands.drive.drive_startCalibration;
 import frc.team1918.robot.commands.drive.drive_stopCalibration;
 import frc.team1918.robot.commands.drive.drive_resetGyro;
+import frc.team1918.robot.commands.drive.drive_moveAllToMechZero;
 //samples
 import frc.team1918.robot.commands.ExampleCommand;
 import frc.team1918.robot.commands.shooter.shooter_shootWall;
@@ -93,7 +94,6 @@ public class RobotContainer {
   private JoystickButton btn_COLLECTOR_IN = new JoystickButton(oj, Constants.OI.OPER_BTN_COLLECTOR_IN);
   private JoystickButton btn_ABSZERO_KEY2 = new JoystickButton(oj, Constants.OI.OPER_BTN_ABSZERO_KEY2);
 
-
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
@@ -136,7 +136,7 @@ public class RobotContainer {
     // btn_THROTDN_DN.or(btn_THROTDN_DL).or(btn_THROTDN_DR).whenPressed(new do_something_else);
 
     //bind both buttons requirement
-    // btn_ABSZERO_KEY1.and(btn_ABSZERO_KEY2).whenPressed(new command);
+    //btn_ABSZERO_KEY1.and(btn_ABSZERO_KEY2).whenPressed(new drive_moveAllToMechZero(m_drive));
 
 
   }

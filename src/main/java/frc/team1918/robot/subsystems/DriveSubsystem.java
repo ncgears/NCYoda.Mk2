@@ -21,7 +21,10 @@ public class DriveSubsystem extends SubsystemBase {
 	private static DriveSubsystem instance;
 	private static SwerveModule dtFL, dtFR, dtRL, dtRR;
 	private static AHRS gyro;
-	private static int flHome = 0, frHome = 0, rlHome = 0, rrHome = 0;
+	private static int flHome = Constants.DriveTrain.DT_FL_MECHZERO;
+	private static int frHome = Constants.DriveTrain.DT_FR_MECHZERO;
+	private static int rlHome = Constants.DriveTrain.DT_RL_MECHZERO;
+	private static int rrHome = Constants.DriveTrain.DT_RR_MECHZERO;
 	private static boolean isFirstTime = true;
 	private File f;
 	private BufferedWriter bw;
@@ -44,7 +47,7 @@ public class DriveSubsystem extends SubsystemBase {
 				Constants.DriveTrain.DT_TURN_P, 
 				Constants.DriveTrain.DT_TURN_I, 
 				Constants.DriveTrain.DT_TURN_D, 
-				Constants.DriveTrain.DT_TURN_IZONE, "dtFL"); // Front Left //izone was 200  // 3,0,50,0
+				Constants.DriveTrain.DT_TURN_IZONE, "dtFL"); // Front Left
 		dtFR = new SwerveModule(Constants.DriveTrain.DT_FR_DRIVE_MC_ID,
 				Constants.DriveTrain.DT_FR_TURN_MC_ID, 
 				Constants.DriveTrain.DT_TURN_P, 
@@ -362,6 +365,13 @@ public class DriveSubsystem extends SubsystemBase {
 		dtRR.setTurnLocationInEncoderTicks(rrHome);
 	}
 
+	public void moveAllToMechZero() {
+		System.out.println("moveAllToMechZero");
+		dtFL.setTurnLocationInEncoderTicks(Constants.DriveTrain.DT_FL_MECHZERO);
+		dtFR.setTurnLocationInEncoderTicks(Constants.DriveTrain.DT_FR_MECHZERO);
+		dtRL.setTurnLocationInEncoderTicks(Constants.DriveTrain.DT_RL_MECHZERO);
+		dtRR.setTurnLocationInEncoderTicks(Constants.DriveTrain.DT_RR_MECHZERO);
+	}
 	public void startCalibrationMode() {
 		System.out.println("startCalibrationMode");
 		lockDriveControls(true);
@@ -404,6 +414,18 @@ public class DriveSubsystem extends SubsystemBase {
 			dtFR.isTurnAtHome(frHome) &&
 			dtRL.isTurnAtHome(rlHome) &&
 			dtRR.isTurnAtHome(rrHome)
+			) {
+				return true;
+			}
+		return false;
+	}
+
+	public boolean isAllTurnAtMechZero() {
+		if (
+			dtFL.isTurnAtHome(Constants.DriveTrain.DT_FL_MECHZERO) &&
+			dtFR.isTurnAtHome(Constants.DriveTrain.DT_FR_MECHZERO) &&
+			dtRL.isTurnAtHome(Constants.DriveTrain.DT_RL_MECHZERO) &&
+			dtRR.isTurnAtHome(Constants.DriveTrain.DT_RR_MECHZERO)
 			) {
 				return true;
 			}

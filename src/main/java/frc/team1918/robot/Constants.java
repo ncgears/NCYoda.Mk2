@@ -27,26 +27,21 @@ public class Constants {
         public final static double DT_TURN_D = 80.0;
         public final static int DT_TURN_IZONE = 0;
 
-        public final static double DT_TURN_FL_P = 8.0;
-        public final static double DT_TURN_FL_I = 0.0;
-        public final static double DT_TURN_FL_D = 80.0;
-        public final static int DT_TURN_FL_IZONE = 0;
-
         public final static int DT_FL_DRIVE_MC_ID = 2; //Front Left Drive Motor Controller ID //SPARKMAX
         public final static int DT_FL_TURN_MC_ID = 7; //Front Left Turn Motor Controller ID //TALONSRX
-        // public final static int DT_FL_HOME = 0; //Front Left encoder value at home position
+        public final static int DT_FL_MECHZERO = 0; //Front Left encoder value at mechanical zero, only change if mechanics broke things
         
         public final static int DT_FR_DRIVE_MC_ID = 16; //Front Right Drive Motor Controller ID //SPARKMAX
         public final static int DT_FR_TURN_MC_ID = 4; //Front Right Turn Motor Controller ID //TALONSRX
-        // public final static int DT_FR_HOME = 0; //Front Right encoder value at home position
+        public final static int DT_FR_MECHZERO = 0; //Front Right encoder value at mechanical zero, only change if mechanics broke things
 
         public final static int DT_RL_DRIVE_MC_ID = 3; //Rear Left Drive Motor Controller ID //SPARKMAX
         public final static int DT_RL_TURN_MC_ID = 8; //Rear Left Turn Motor Controller ID //TALONSRX
-        // public final static int DT_RL_HOME = 0; //Rear Left encoder value at home position
+        public final static int DT_RL_MECHZERO = 0; //Rear Left encoder value at mechanical zero, only change if mechanics broke things
         
         public final static int DT_RR_DRIVE_MC_ID = 1; //Rear Right Drive Motor Controller ID //SPARKMAX
         public final static int DT_RR_TURN_MC_ID = 11; //Rear Right Turn Motor Controller ID //TALONSRX
-        // public final static int DT_RR_HOME = 0; //Rear Right encoder value at home position
+        public final static int DT_RR_MECHZERO = 0; //Rear Right encoder value at mechanical zero, only change if mechanics broke things
     }
     
     public static final class OI {
