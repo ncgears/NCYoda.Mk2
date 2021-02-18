@@ -18,7 +18,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 //Util imports
-import frc.team1918.robot.utils.DoubleButton;
+import frc.team1918.robot.utils.AndButton;
 import frc.team1918.robot.utils.OrPOVButton;
 //Subsystems imports
 import frc.team1918.robot.subsystems.ExampleSubsystem;
@@ -99,7 +99,7 @@ public class RobotContainer {
   private JoystickButton btn_MECHZERO_KEY2 = new JoystickButton(oj, Constants.OI.OPER_BTN_MECHZERO);
 
   //Special Bindings
-  private DoubleButton btn_MECHZERO = new DoubleButton(btn_MECHZERO_KEY1,btn_MECHZERO_KEY2);
+  private AndButton btn_MECHZERO = new AndButton(btn_MECHZERO_KEY1,btn_MECHZERO_KEY2);
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
