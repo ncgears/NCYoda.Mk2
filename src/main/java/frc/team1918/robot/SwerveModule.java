@@ -82,19 +82,19 @@ public class SwerveModule {
     }
 
     /**
-     * @return encoder relative position
+     * Gets the position of the relative encoder in encoder ticks
+     * @return Integer of relative encoder ticks
      */
     public int getTurnRelPos(){
-        //relative position
         return turn.getSensorCollection().getQuadraturePosition();
         //https://github.com/CrossTheRoadElec/Phoenix-Documentation/blob/master/Legacy/Migration%20Guide.md
     }
 
-    /**
-     * @return encoder absolute position
+    /** 
+     * Gets the position of the absolute encoder in encoder ticks
+     * @return Integer of absolute encoder ticks
      */
     public int getTurnAbsPos(){
-        //absolute position
         return (turn.getSensorCollection().getPulseWidthPosition() & 0xFFF);
     }
 
