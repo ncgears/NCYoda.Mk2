@@ -3,18 +3,23 @@ package frc.team1918.robot.subsystems;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.SPI;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.team1918.robot.Constants;
 import frc.team1918.robot.Helpers;
 import frc.team1918.robot.SwerveModule;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+//file read/write operations
 import java.io.BufferedWriter;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.IOException;
+//kinematics and odometry
+import edu.wpi.first.wpilibj.geometry.Translation2d;
+import edu.wpi.first.wpilibj.kinematics.ChassisSpeeds;
+import edu.wpi.first.wpilibj.kinematics.SwerveDriveKinematics;
+import edu.wpi.first.wpilibj.kinematics.SwerveDriveOdometry;
 
 public class DriveSubsystem extends SubsystemBase {
 
@@ -32,8 +37,12 @@ public class DriveSubsystem extends SubsystemBase {
 	private BufferedReader br;
 	private FileReader fr;
 	private static double l = Constants.Global.ROBOT_LENGTH, w = Constants.Global.ROBOT_WIDTH, r = Math.sqrt((l * l) + (w * w));
-	private static boolean driverManualHomeButton = false, operManualHomeButton = false;
 	private static boolean driveControlsLocked = false; //true while homing operation
+
+	private final Translation2d m_FL_LOCATION = new Translation2d(Helpers.General.inToMeters(Constants.Global.ROBOT_WIDTH/2), Helpers.General.inToMeters(Constants.Global.ROBOT_LENGTH/2));
+	private final Translation2d m_FR_LOCATION = new Translation2d(Helpers.General.inToMeters(Constants.Global.ROBOT_WIDTH/2), -Helpers.General.inToMeters(Constants.Global.ROBOT_LENGTH/2));
+	private final Translation2d m_RL_LOCATION = new Translation2d(-Helpers.General.inToMeters(Constants.Global.ROBOT_WIDTH/2), Helpers.General.inToMeters(Constants.Global.ROBOT_LENGTH/2));
+	private final Translation2d m_RR_LOCATION = new Translation2d(-Helpers.General.inToMeters(Constants.Global.ROBOT_WIDTH/2), -Helpers.General.inToMeters(Constants.Global.ROBOT_LENGTH/2));
 
 	public static DriveSubsystem getInstance() {
 		if (instance == null)
