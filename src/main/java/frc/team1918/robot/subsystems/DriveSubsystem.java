@@ -41,10 +41,10 @@ public class DriveSubsystem extends SubsystemBase {
 	public DriveSubsystem() {
 	    dtFL = new SwerveModule(Constants.DriveTrain.DT_FL_DRIVE_MC_ID,
 				Constants.DriveTrain.DT_FL_TURN_MC_ID, 
-				Constants.DriveTrain.DT_TURN_FL_P, 
-				Constants.DriveTrain.DT_TURN_FL_I, 
-				Constants.DriveTrain.DT_TURN_FL_D, 
-				Constants.DriveTrain.DT_TURN_FL_IZONE, "dtFL"); // Front Left //izone was 200  // 3,0,50,0
+				Constants.DriveTrain.DT_TURN_P, 
+				Constants.DriveTrain.DT_TURN_I, 
+				Constants.DriveTrain.DT_TURN_D, 
+				Constants.DriveTrain.DT_TURN_IZONE, "dtFL"); // Front Left //izone was 200  // 3,0,50,0
 		dtFR = new SwerveModule(Constants.DriveTrain.DT_FR_DRIVE_MC_ID,
 				Constants.DriveTrain.DT_FR_TURN_MC_ID, 
 				Constants.DriveTrain.DT_TURN_P, 

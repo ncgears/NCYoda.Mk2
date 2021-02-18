@@ -22,14 +22,14 @@ public class Constants {
         public final static int DT_HOME_MARGIN_OF_ERROR = 20; //Encoder ticks margin to consider home (plus or minus this amount)
         public final static boolean DT_USE_FIELD_CENTRIC = true; //Set to true to use field-centric drive
         public final static boolean DT_DRIVE_DISABLED = false; //Set to true to disable the drive motors (for lab)
-        public final static double DT_TURN_P = 5;
-        public final static double DT_TURN_I = 0.01;
-        public final static double DT_TURN_D = 10.0;
+        public final static double DT_TURN_P = 8.0;
+        public final static double DT_TURN_I = 0.0;
+        public final static double DT_TURN_D = 80.0;
         public final static int DT_TURN_IZONE = 0;
 
-        public final static double DT_TURN_FL_P = 5;
+        public final static double DT_TURN_FL_P = 8.0;
         public final static double DT_TURN_FL_I = 0.0;
-        public final static double DT_TURN_FL_D = 0.0;
+        public final static double DT_TURN_FL_D = 80.0;
         public final static int DT_TURN_FL_IZONE = 0;
 
         public final static int DT_FL_DRIVE_MC_ID = 2; //Front Left Drive Motor Controller ID //SPARKMAX
