@@ -21,20 +21,23 @@ import frc.team1918.robot.commands.drive.drive_moveAllToHomes;
 import frc.team1918.robot.commands.drive.drive_resetAllEnc;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 
-/**
- * A command to drive the robot with joystick input (passed in as {@link DoubleSupplier}s). Written
- * explicitly for pedagogical purposes - actual code should inline a command this simple with {@link
- * edu.wpi.first.wpilibj2.command.RunCommand}.
- */
 public class cg_drive_autoHome extends SequentialCommandGroup {
   private final DriveSubsystem m_drive;
 
-
   /**
-   * Creates a new command group.
-   *
-   * @param subsystem The drive subsystem this command will run on.
-   */
+   * This command group is the sequence for homing the swerve modules to their respective home positions. 
+   * This depends on having been previously calibrated, which saves the home position values to the roborio in a file defined by Constants.DriveTrain.DT_HOMES_FILE
+   * <ol>
+   * <li>lock drive controls</li>
+   * <li>enable absolute encoder</li>
+   * <li>move all swerver modules to home</li>
+   * <li>reset all relative encoders</li>
+   * <li>disable absolute encoder</li>
+   * <li>unlock drive controls</li>
+   * </ol>
+   * <br>
+   * @param subsystem The subsystem this command will run on.
+  */
   public cg_drive_autoHome(DriveSubsystem subsystem) {
     m_drive = subsystem;
     addRequirements(m_drive);
