@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.team1918.robot.commands;
+package frc.team1918.robot.commands.drive;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import java.util.function.DoubleSupplier;
@@ -18,25 +18,22 @@ import frc.team1918.robot.subsystems.DriveSubsystem;
  * explicitly for pedagogical purposes - actual code should inline a command this simple with {@link
  * edu.wpi.first.wpilibj2.command.RunCommand}.
  */
-public class drive_lockDriveControls extends CommandBase {
+public class drive_resetGyro extends CommandBase {
   private final DriveSubsystem m_drive;
-  private final boolean m_lock;
-
 
   /**
    * Creates a new command.
    *
    * @param subsystem The drive subsystem this command will run on.
    */
-  public drive_lockDriveControls(DriveSubsystem subsystem, boolean lock) {
+  public drive_resetGyro(DriveSubsystem subsystem) {
     m_drive = subsystem;
-    m_lock = lock;
     addRequirements(m_drive);
   }
 
   @Override
-  public void execute() {
-    m_drive.lockDriveControls(m_lock);
+  public void end(boolean interrupted) {
+    m_drive.resetGyro();
   }
 
   @Override

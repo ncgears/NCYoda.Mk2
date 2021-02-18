@@ -25,10 +25,10 @@ import frc.team1918.robot.subsystems.DriveSubsystem;
 import frc.team1918.robot.subsystems.ShooterSubsystem;
 import frc.team1918.robot.subsystems.MixerSubsystem;
 //Commands imports
-import frc.team1918.robot.commands.drive_defaultDrive;
-import frc.team1918.robot.commands.drive_startCalibration;
-import frc.team1918.robot.commands.drive_stopCalibration;
-import frc.team1918.robot.commands.drive_resetGyro;
+import frc.team1918.robot.commands.drive.drive_defaultDrive;
+import frc.team1918.robot.commands.drive.drive_startCalibration;
+import frc.team1918.robot.commands.drive.drive_stopCalibration;
+import frc.team1918.robot.commands.drive.drive_resetGyro;
 //samples
 import frc.team1918.robot.commands.ExampleCommand;
 import frc.team1918.robot.commands.shooter.shooter_shootWall;

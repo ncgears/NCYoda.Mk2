@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.team1918.robot.commands;
+package frc.team1918.robot.commands.drive;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import java.util.function.DoubleSupplier;
@@ -18,8 +18,9 @@ import frc.team1918.robot.subsystems.DriveSubsystem;
  * explicitly for pedagogical purposes - actual code should inline a command this simple with {@link
  * edu.wpi.first.wpilibj2.command.RunCommand}.
  */
-public class drive_stopCalibration extends CommandBase {
+public class drive_enableAbsEncoder extends CommandBase {
   private final DriveSubsystem m_drive;
+  private final boolean m_enable;
 
 
   /**
@@ -27,14 +28,15 @@ public class drive_stopCalibration extends CommandBase {
    *
    * @param subsystem The drive subsystem this command will run on.
    */
-  public drive_stopCalibration(DriveSubsystem subsystem) {
+  public drive_enableAbsEncoder(DriveSubsystem subsystem, boolean enable) {
     m_drive = subsystem;
+    m_enable = enable;
     addRequirements(m_drive);
   }
 
   @Override
   public void execute() {
-    m_drive.stopCalibrationMode();
+    m_drive.setAllTurnEncoderAbsolute(m_enable);
   }
 
   @Override

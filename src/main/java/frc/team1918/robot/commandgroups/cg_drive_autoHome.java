@@ -15,10 +15,10 @@ import java.util.function.DoubleSupplier;
 
 import frc.team1918.robot.subsystems.DriveSubsystem;
 import frc.team1918.robot.Constants;
-import frc.team1918.robot.commands.drive_enableAbsEncoder;
-import frc.team1918.robot.commands.drive_lockDriveControls;
-import frc.team1918.robot.commands.drive_moveAllToHomes;
-import frc.team1918.robot.commands.drive_resetAllEnc;
+import frc.team1918.robot.commands.drive.drive_enableAbsEncoder;
+import frc.team1918.robot.commands.drive.drive_lockDriveControls;
+import frc.team1918.robot.commands.drive.drive_moveAllToHomes;
+import frc.team1918.robot.commands.drive.drive_resetAllEnc;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 /**
