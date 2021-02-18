@@ -85,8 +85,8 @@ public class RobotContainer {
   private POVButton btn_THROTDN_DN = new POVButton(dj, Constants.OI.DRIVE_DPAD_THROTDN_DN);
     private POVButton btn_THROTDN_DL = new POVButton(dj, Constants.OI.DRIVE_DPAD_THROTDN_DL);
     private POVButton btn_THROTDN_DR = new POVButton(dj, Constants.OI.DRIVE_DPAD_THROTDN_DR);
-  private OrPOVButton btn_THROTUP = new OrPOVButton(btn_THROTUP_UP, btn_THROTUP_UL, btn_THROTUP_UR);
-  private OrPOVButton btn_THROTDN = new OrPOVButton(btn_THROTDN_DN, btn_THROTDN_DL, btn_THROTDN_DR);
+  private OrPOVButton orbtn_THROTUP = new OrPOVButton(btn_THROTUP_UP, btn_THROTUP_UL, btn_THROTUP_UR);
+  private OrPOVButton orbtn_THROTDN = new OrPOVButton(btn_THROTDN_DN, btn_THROTDN_DL, btn_THROTDN_DR);
   
   //Operator Controller
   private Joystick oj = new Joystick(Constants.OI.OI_JOY_OPER);
@@ -99,7 +99,7 @@ public class RobotContainer {
   private JoystickButton btn_MECHZERO_KEY2 = new JoystickButton(oj, Constants.OI.OPER_BTN_MECHZERO);
 
   //Special Bindings
-  private AndButton btn_MECHZERO = new AndButton(btn_MECHZERO_KEY1,btn_MECHZERO_KEY2);
+  private AndButton andbtn_MECHZERO = new AndButton(btn_MECHZERO_KEY1,btn_MECHZERO_KEY2);
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -140,12 +140,12 @@ public class RobotContainer {
 
     //bind all 3 up and all 3 down for shooter throttle up/down
     // btn_THROTUP_UP.or(btn_THROTUP_UL).or(btn_THROTUP_UR).whenPressed(new do_something);
-    // btn_THROTUP.whenPressed(new shooter_increaseThrottle());
+    // orbtn_THROTUP.whenPressed(new shooter_increaseThrottle());
     // btn_THROTDN_DN.or(btn_THROTDN_DL).or(btn_THROTDN_DR).whenPressed(new do_something_else);
-    // btn_THROTDN.whenPressed(new shooter_decreaseThrottle());
+    // orbtn_THROTDN.whenPressed(new shooter_decreaseThrottle());
 
     //bind both buttons requirement
-    btn_MECHZERO.whenPressed(new drive_moveAllToMechZero(m_drive));
+    andbtn_MECHZERO.whenPressed(new drive_moveAllToMechZero(m_drive));
     //btn_ABSZERO_KEY1.and(btn_ABSZERO_KEY2).whenPressed(new drive_moveAllToMechZero(m_drive));
 
 
