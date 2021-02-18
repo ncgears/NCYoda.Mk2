@@ -39,10 +39,10 @@ public class DriveSubsystem extends SubsystemBase {
 	private static double l = Constants.Global.ROBOT_LENGTH, w = Constants.Global.ROBOT_WIDTH, r = Math.sqrt((l * l) + (w * w));
 	private static boolean driveControlsLocked = false; //true while homing operation
 
-	private final Translation2d m_FL_LOCATION = new Translation2d(Helpers.General.inToMeters(Constants.Global.ROBOT_WIDTH/2), Helpers.General.inToMeters(Constants.Global.ROBOT_LENGTH/2));
-	private final Translation2d m_FR_LOCATION = new Translation2d(Helpers.General.inToMeters(Constants.Global.ROBOT_WIDTH/2), -Helpers.General.inToMeters(Constants.Global.ROBOT_LENGTH/2));
-	private final Translation2d m_RL_LOCATION = new Translation2d(-Helpers.General.inToMeters(Constants.Global.ROBOT_WIDTH/2), Helpers.General.inToMeters(Constants.Global.ROBOT_LENGTH/2));
-	private final Translation2d m_RR_LOCATION = new Translation2d(-Helpers.General.inToMeters(Constants.Global.ROBOT_WIDTH/2), -Helpers.General.inToMeters(Constants.Global.ROBOT_LENGTH/2));
+	// private final Translation2d m_FL_LOCATION = new Translation2d(Helpers.General.inToMeters(Constants.Global.ROBOT_WIDTH/2), Helpers.General.inToMeters(Constants.Global.ROBOT_LENGTH/2));
+	// private final Translation2d m_FR_LOCATION = new Translation2d(Helpers.General.inToMeters(Constants.Global.ROBOT_WIDTH/2), -Helpers.General.inToMeters(Constants.Global.ROBOT_LENGTH/2));
+	// private final Translation2d m_RL_LOCATION = new Translation2d(-Helpers.General.inToMeters(Constants.Global.ROBOT_WIDTH/2), Helpers.General.inToMeters(Constants.Global.ROBOT_LENGTH/2));
+	// private final Translation2d m_RR_LOCATION = new Translation2d(-Helpers.General.inToMeters(Constants.Global.ROBOT_WIDTH/2), -Helpers.General.inToMeters(Constants.Global.ROBOT_LENGTH/2));
 
 	public static DriveSubsystem getInstance() {
 		if (instance == null)
