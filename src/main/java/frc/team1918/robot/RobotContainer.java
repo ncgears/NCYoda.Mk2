@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 //Util imports
 import frc.team1918.robot.utils.DoubleButton;
+import frc.team1918.robot.utils.OrPOVButton;
 //Subsystems imports
 import frc.team1918.robot.subsystems.ExampleSubsystem;
 import frc.team1918.robot.subsystems.ClimberSubsystem;
@@ -84,6 +85,8 @@ public class RobotContainer {
   private POVButton btn_THROTDN_DN = new POVButton(dj, Constants.OI.DRIVE_DPAD_THROTDN_DN);
     private POVButton btn_THROTDN_DL = new POVButton(dj, Constants.OI.DRIVE_DPAD_THROTDN_DL);
     private POVButton btn_THROTDN_DR = new POVButton(dj, Constants.OI.DRIVE_DPAD_THROTDN_DR);
+  private OrPOVButton btn_THROTUP = new OrPOVButton(btn_THROTUP_UP, btn_THROTUP_UL, btn_THROTUP_UR);
+  private OrPOVButton btn_THROTDN = new OrPOVButton(btn_THROTDN_DN, btn_THROTDN_DL, btn_THROTDN_DR);
   
   //Operator Controller
   private Joystick oj = new Joystick(Constants.OI.OI_JOY_OPER);
@@ -137,7 +140,9 @@ public class RobotContainer {
 
     //bind all 3 up and all 3 down for shooter throttle up/down
     // btn_THROTUP_UP.or(btn_THROTUP_UL).or(btn_THROTUP_UR).whenPressed(new do_something);
+    // btn_THROTUP.whenPressed(new shooter_increaseThrottle());
     // btn_THROTDN_DN.or(btn_THROTDN_DL).or(btn_THROTDN_DR).whenPressed(new do_something_else);
+    // btn_THROTDN.whenPressed(new shooter_decreaseThrottle());
 
     //bind both buttons requirement
     btn_MECHZERO.whenPressed(new drive_moveAllToMechZero(m_drive));
