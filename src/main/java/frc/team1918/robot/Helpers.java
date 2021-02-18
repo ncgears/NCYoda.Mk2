@@ -5,6 +5,16 @@ import frc.team1918.robot.Constants;
 import edu.wpi.first.wpilibj.Joystick;
 
 public class Helpers {
+    public static final class General {
+        /**
+        * This function takes a value in inches and returns in meters
+        * @param inches double precision value in inches
+        * @return value in meters
+        */
+       public final static double inToMeters(double inches) {
+           return inches * 0.0254;
+       }
+    }
     public static final class OI {
         private static Joystick dj = new Joystick(Constants.OI.OI_JOY_DRIVE);
         private static Joystick oj = new Joystick(Constants.OI.OI_JOY_OPER);
